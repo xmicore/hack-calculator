@@ -6,8 +6,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 class Footer extends HorizontalLayout {
 
     Footer() {
-        add(new Label("© 2019 Michael Kern"));
+        add(new Label("© 2019 David König und Michael Kern"));
         setHeight("2.0em");
-        // getStyle().set("background-color", "blue");
     }
 }

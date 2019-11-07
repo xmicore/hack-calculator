@@ -9,6 +9,5 @@ class Header extends HorizontalLayout {
         add(new Label("Hack Calculator"));
         setSizeFull();
         setHeight("2.0em");
-        // getStyle().set("background-color", "red");
     }
 }
