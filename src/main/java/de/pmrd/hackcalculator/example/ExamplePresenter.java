@@ -21,7 +21,7 @@ public class ExamplePresenter {
     }
 
     @EventListener
-    private void init(ExampleViewInitEvent event) {
+    public void init(ExampleViewInitEvent event) {
         view.setText("Hello World at " + service.getDateTimeAsString());
     }
 

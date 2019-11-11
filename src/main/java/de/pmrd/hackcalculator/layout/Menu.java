@@ -10,7 +10,7 @@ import de.pmrd.hackcalculator.settings.SettingsViewImpl;
 class Menu extends Composite<HorizontalLayout> implements HasComponents {
 
     Menu() {
-        add(new RouterLink("Kalkulierung", CalculatorViewImpl.class));
+        add(new RouterLink("Berechnung", CalculatorViewImpl.class));
         add(new RouterLink("Einstellungen", SettingsViewImpl.class));
     }
 }
