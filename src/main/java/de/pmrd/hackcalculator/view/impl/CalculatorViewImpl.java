@@ -1,9 +1,11 @@
 package de.pmrd.hackcalculator.view.impl;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
@@ -32,6 +34,11 @@ public class CalculatorViewImpl extends VerticalLayout implements CalculatorView
     private NumberField numberOfPersons;
     private NumberField hackPerBun;
     private NumberField bunsPerPerson;
+    private Checkbox onions;
+    private Checkbox mustard;
+    private Checkbox pickles;
+    private Checkbox toothpick;
+
     private Button transferToHistory;
     private Label result;
 
@@ -62,8 +69,23 @@ public class CalculatorViewImpl extends VerticalLayout implements CalculatorView
         this.bunsPerPerson.setStep(0.5);
         add(this.bunsPerPerson);
 
+        HorizontalLayout addons = new HorizontalLayout();
+
+        this.onions = new Checkbox("Zwiebeln");
+        addons.add(this.onions);
+
+        this.mustard = new Checkbox("Senf");
+        addons.add(this.mustard);
+
+        this.pickles = new Checkbox("Essiggurken");
+        addons.add(this.pickles);
+
+        this.toothpick = new Checkbox("Zahnstocher");
+        addons.add(this.toothpick);
+
+        add(addons);
+
         this.result = new Label();
-        this.result.setVisible(false);
         add(this.result);
 
         this.transferToHistory = new Button("übernehmen");
@@ -75,6 +97,10 @@ public class CalculatorViewImpl extends VerticalLayout implements CalculatorView
         binder.bind(numberOfPersons, CalculatorViewModel::getNumberOfPersons, CalculatorViewModel::setNumberOfPersons);
         binder.bind(hackPerBun, CalculatorViewModel::getHackPerBun, CalculatorViewModel::setHackPerBun);
         binder.bind(bunsPerPerson, CalculatorViewModel::getBunsPerPerson, CalculatorViewModel::setBunsPerPerson);
+        binder.bind(onions, CalculatorViewModel::isOnions, CalculatorViewModel::setOnions);
+        binder.bind(mustard, CalculatorViewModel::isMustard, CalculatorViewModel::setMustard);
+        binder.bind(pickles, CalculatorViewModel::isPickles, CalculatorViewModel::setPickles);
+        binder.bind(toothpick, CalculatorViewModel::isToothpick, CalculatorViewModel::setToothpick);
     }
 
     @Override
@@ -84,7 +110,6 @@ public class CalculatorViewImpl extends VerticalLayout implements CalculatorView
 
     @Override
     public void setResult(String text) {
-        this.result.setVisible(true);
         this.result.setText(text);
     }
 

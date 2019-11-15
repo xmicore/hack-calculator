@@ -32,7 +32,7 @@ public class CalculatorPresenter implements CalculateListener, TransferToHistory
     @Override
     public void calculate() {
         final double hack = service.calculateHack(model.getNumberOfPersons(), model.getHackPerBun(), model.getBunsPerPerson());
-        this.view.setResult("Sie benötigen " +  hack + "g Hack.");
+        this.view.setResult("Sie benötigen " + hack + "g Hack.");
     }
 
     @Override
