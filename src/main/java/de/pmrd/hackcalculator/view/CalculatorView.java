@@ -1,4 +1,6 @@
-package de.pmrd.hackcalculator.calculator;
+package de.pmrd.hackcalculator.view;
+
+import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 
 public interface CalculatorView {
 

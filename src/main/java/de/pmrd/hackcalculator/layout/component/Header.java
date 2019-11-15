@@ -1,11 +1,11 @@
-package de.pmrd.hackcalculator.layout;
+package de.pmrd.hackcalculator.layout.component;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-class Header extends VerticalLayout {
+public class Header extends VerticalLayout {
 
-    Header() {
+    public Header() {
         add(new Label("Hack Calculator"));
         setSizeFull();
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);

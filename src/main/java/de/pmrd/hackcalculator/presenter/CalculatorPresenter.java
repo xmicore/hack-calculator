@@ -1,11 +1,15 @@
-package de.pmrd.hackcalculator.calculator;
+package de.pmrd.hackcalculator.presenter;
 
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.spring.annotation.VaadinSessionScope;
+import de.pmrd.hackcalculator.service.CalculatorService;
+import de.pmrd.hackcalculator.view.CalculatorView;
+import de.pmrd.hackcalculator.view.event.CalculatorViewInitEvent;
+import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import de.pmrd.hackcalculator.calculator.CalculatorView.CalculateListener;
-import de.pmrd.hackcalculator.calculator.CalculatorView.TransferToHistoryListener;
+import de.pmrd.hackcalculator.view.CalculatorView.CalculateListener;
+import de.pmrd.hackcalculator.view.CalculatorView.TransferToHistoryListener;
 
 @Component
 @VaadinSessionScope
@@ -21,7 +25,7 @@ public class CalculatorPresenter implements CalculateListener, TransferToHistory
         this.service = service;
     }
 
-    void setView(CalculatorView view) {
+    public void setView(CalculatorView view) {
         this.view = view;
     }
 

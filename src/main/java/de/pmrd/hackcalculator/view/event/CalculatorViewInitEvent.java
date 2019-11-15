@@ -1,5 +1,6 @@
-package de.pmrd.hackcalculator.calculator;
+package de.pmrd.hackcalculator.view.event;
 
+import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 import org.springframework.context.ApplicationEvent;
 
 public class CalculatorViewInitEvent extends ApplicationEvent {

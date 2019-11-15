@@ -1,4 +1,4 @@
-package de.pmrd.hackcalculator.settings;
+package de.pmrd.hackcalculator.view.impl;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -6,6 +6,9 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.layout.DefaultLayout;
+import de.pmrd.hackcalculator.presenter.SettingsPresenter;
+import de.pmrd.hackcalculator.view.event.SettingsViewInitEvent;
+import de.pmrd.hackcalculator.view.SettingsView;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Route(value = SettingsViewImpl.VIEW_NAME, layout = DefaultLayout.class)
