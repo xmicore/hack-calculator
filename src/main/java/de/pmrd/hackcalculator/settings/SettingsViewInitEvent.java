@@ -1,4 +1,4 @@
-package de.pmrd.hackcalculator.view.event;
+package de.pmrd.hackcalculator.settings;
 
 import org.springframework.context.ApplicationEvent;
 

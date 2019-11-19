@@ -8,9 +8,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLayout;
-import de.pmrd.hackcalculator.layout.component.Footer;
-import de.pmrd.hackcalculator.layout.component.Header;
-import de.pmrd.hackcalculator.layout.component.Menu;
 
 public class DefaultLayout extends Composite<VerticalLayout> implements HasComponents, RouterLayout {
 

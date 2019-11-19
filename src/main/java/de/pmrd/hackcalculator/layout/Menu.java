@@ -1,15 +1,15 @@
-package de.pmrd.hackcalculator.layout.component;
+package de.pmrd.hackcalculator.layout;
 
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouterLink;
-import de.pmrd.hackcalculator.view.impl.CalculatorViewImpl;
-import de.pmrd.hackcalculator.view.impl.SettingsViewImpl;
+import de.pmrd.hackcalculator.calculator.CalculatorViewImpl;
+import de.pmrd.hackcalculator.settings.SettingsViewImpl;
 
-public class Menu extends Composite<HorizontalLayout> implements HasComponents {
+class Menu extends Composite<HorizontalLayout> implements HasComponents {
 
-    public Menu() {
+    Menu() {
         add(new RouterLink("Berechnung", CalculatorViewImpl.class));
         add(new RouterLink("Einstellungen", SettingsViewImpl.class));
     }

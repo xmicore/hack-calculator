@@ -1,4 +1,4 @@
-package de.pmrd.hackcalculator.view.impl;
+package de.pmrd.hackcalculator.calculator;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
@@ -13,10 +13,6 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.layout.DefaultLayout;
-import de.pmrd.hackcalculator.presenter.CalculatorPresenter;
-import de.pmrd.hackcalculator.view.CalculatorView;
-import de.pmrd.hackcalculator.view.event.CalculatorViewInitEvent;
-import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Route(value = CalculatorViewImpl.VIEW_NAME, layout = DefaultLayout.class)

@@ -1,4 +1,4 @@
-package de.pmrd.hackcalculator.view.model;
+package de.pmrd.hackcalculator.calculator;
 
 public class CalculatorViewModel {
 
