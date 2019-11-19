@@ -8,8 +8,7 @@ public class CalculatorViewModel {
 
   private double bunsPerPerson;
 
-  public CalculatorViewModel() {
-  }
+  public CalculatorViewModel() {}
 
   public double getNumberOfPersons() {
     return numberOfPersons;

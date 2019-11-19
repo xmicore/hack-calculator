@@ -1,9 +1,11 @@
 package de.pmrd.hackcalculator.calculator;
 
+import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
@@ -15,7 +17,7 @@ import org.springframework.context.ApplicationEventPublisher;
 @Route(value = CalculatorViewImpl.VIEW_NAME, layout = DefaultLayout.class)
 @RouteAlias(value = "", layout = DefaultLayout.class)
 @PageTitle("Berechnung")
-public class CalculatorViewImpl extends VerticalLayout
+public class CalculatorViewImpl extends Composite<VerticalLayout>
     implements CalculatorView, AfterNavigationObserver {
 
   static final String VIEW_NAME = "calculator";
@@ -39,32 +41,32 @@ public class CalculatorViewImpl extends VerticalLayout
   }
 
   private void init() {
-    setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+    getContent().setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
     this.numberOfPersons = new NumberField("Anzahl der Personen");
     this.numberOfPersons.setHasControls(true);
     this.numberOfPersons.setMin(1);
     this.numberOfPersons.setValueChangeMode(ValueChangeMode.ON_CHANGE);
-    add(this.numberOfPersons);
+    getContent().add(this.numberOfPersons);
 
     this.hackPerBun = new NumberField("Hack pro Brötchen");
     this.hackPerBun.setHasControls(true);
     this.hackPerBun.setMin(1);
-    add(this.hackPerBun);
+    getContent().add(this.hackPerBun);
 
     this.bunsPerPerson = new NumberField("Brötchen pro Person");
     this.bunsPerPerson.setHasControls(true);
     this.bunsPerPerson.setMin(0.5);
     this.bunsPerPerson.setStep(0.5);
-    add(this.bunsPerPerson);
+    getContent().add(this.bunsPerPerson);
 
     this.result = new Label();
     this.result.setVisible(false);
-    add(this.result);
+    getContent().add(this.result);
 
     this.transferToHistory = new Button("übernehmen");
     this.transferToHistory.setIcon(new Icon(VaadinIcon.CHECK));
-    add(this.transferToHistory);
+    getContent().add(this.transferToHistory);
   }
 
   private void bind() {

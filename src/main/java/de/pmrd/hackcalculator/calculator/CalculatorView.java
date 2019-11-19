@@ -2,19 +2,7 @@ package de.pmrd.hackcalculator.calculator;
 
 public interface CalculatorView {
 
-  interface CalculateListener {
-
-    void calculate();
-
-  }
-
   void setCalculateListener(CalculateListener listener);
-
-  interface TransferToHistoryListener {
-
-    void transfer(CalculatorViewModel model);
-
-  }
 
   void setTransferToHistoryListener(TransferToHistoryListener listener);
 
@@ -22,4 +10,13 @@ public interface CalculatorView {
 
   void setResult(String text);
 
+  interface CalculateListener {
+
+    void calculate();
+  }
+
+  interface TransferToHistoryListener {
+
+    void transfer(CalculatorViewModel model);
+  }
 }
