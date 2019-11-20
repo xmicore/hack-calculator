@@ -1,16 +1,14 @@
 package de.pmrd.hackcalculator.history;
 
-import com.vaadin.flow.data.provider.DataProvider;
-import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.VaadinSessionScope;
-import org.springframework.context.event.EventListener;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
-@SpringComponent
+@Component
 @VaadinSessionScope
 public class HistoryPresenter {
 
@@ -18,11 +16,6 @@ public class HistoryPresenter {
 
   void setView(HistoryView view) {
     this.view = view;
-  }
-
-  @EventListener
-  private void init(HistoryViewInitEvent event) {
-    view.setHistoryDataProvider(DataProvider.ofCollection(getHistoryData()));
   }
 
   private List<HistoryViewModel> getHistoryData() {
@@ -43,4 +36,10 @@ public class HistoryPresenter {
 
     return historyItems;
   }
+
+  @EventListener
+  public void init(HistoryViewInitEvent event) {
+    view.setHistoryData(getHistoryData());
+  }
+
 }

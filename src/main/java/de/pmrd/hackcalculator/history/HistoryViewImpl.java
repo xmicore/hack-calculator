@@ -10,6 +10,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.layout.DefaultLayout;
+import java.util.List;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Route(value = HistoryViewImpl.VIEW_NAME, layout = DefaultLayout.class)
@@ -46,8 +47,8 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   }
 
   @Override
-  public void setHistoryDataProvider(DataProvider dataProvider) {
-    historyGrid.setDataProvider(dataProvider);
+  public void setHistoryData(List<HistoryViewModel> data) {
+    historyGrid.setDataProvider(DataProvider.ofCollection(data));
   }
 
   @Override

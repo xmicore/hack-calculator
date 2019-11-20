@@ -1,7 +1,9 @@
 package de.pmrd.hackcalculator.history;
 
-import com.vaadin.flow.data.provider.DataProvider;
+import java.util.List;
 
 public interface HistoryView {
-  void setHistoryDataProvider(DataProvider dataProvider);
+
+  void setHistoryData(List<HistoryViewModel> data);
+
 }
