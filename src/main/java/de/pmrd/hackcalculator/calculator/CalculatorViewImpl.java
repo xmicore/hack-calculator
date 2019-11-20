@@ -11,8 +11,7 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.*;
-import de.pmrd.hackcalculator.history.HistoryView;
-import de.pmrd.hackcalculator.history.HistoryViewImpl;
+import de.pmrd.hackcalculator.cart.CartViewImpl;
 import de.pmrd.hackcalculator.layout.DefaultLayout;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -31,7 +30,7 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
   private NumberField numberOfPersons;
   private NumberField hackPerBun;
   private NumberField bunsPerPerson;
-  private Button shoppingListBtn;
+  private Button cartBtn;
   private Label result;
 
   public CalculatorViewImpl(
@@ -65,10 +64,10 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
     this.result = new Label();
     getContent().add(this.result);
 
-    this.shoppingListBtn = new Button();
-    this.shoppingListBtn.setIcon(new Icon(VaadinIcon.CART));
-    this.shoppingListBtn.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(HistoryViewImpl.VIEW_NAME)));
-    getContent().add(this.shoppingListBtn);
+    this.cartBtn = new Button();
+    this.cartBtn.setIcon(new Icon(VaadinIcon.CART));
+    this.cartBtn.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(CartViewImpl.VIEW_NAME)));
+    getContent().add(this.cartBtn);
   }
 
   private void bind() {
