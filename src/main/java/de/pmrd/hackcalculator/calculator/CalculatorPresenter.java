@@ -1,15 +1,15 @@
 package de.pmrd.hackcalculator.calculator;
 
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import de.pmrd.hackcalculator.calculator.CalculatorView.CalculateListener;
-import de.pmrd.hackcalculator.calculator.CalculatorView.TransferToHistoryListener;
+import de.pmrd.hackcalculator.calculator.service.CalculateHackData;
+import de.pmrd.hackcalculator.calculator.service.CalculatorService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
 @VaadinSessionScope
-public class CalculatorPresenter implements CalculateListener, TransferToHistoryListener {
+public class CalculatorPresenter implements CalculateListener {
 
   private final CalculatorService service;
 
@@ -27,22 +27,21 @@ public class CalculatorPresenter implements CalculateListener, TransferToHistory
 
   @Override
   public void calculate() {
-    final double hack =
-        service.calculateHack(
-            model.getNumberOfPersons(), model.getHackPerBun(), model.getBunsPerPerson());
-    this.view.setResult("Sie benötigen " + hack + "g Hack.");
-  }
-
-  @Override
-  public void transfer(CalculatorViewModel model) {
-    Notification.show("Historie existiert noch nicht.");
+    CalculateHackData data = new CalculateHackData.Builder()
+            .setBunsPerPerson(model.getBunsPerPerson())
+            .setHackPerBun(model.getHackPerBun())
+            .setNumberOfPersons(model.getNumberOfPersons())
+            .build();
+    final double hack =   service.calculateHack(data);
+    this.view.setQuantity(hack);
   }
 
   @EventListener
   public void init(CalculatorViewInitEvent event) {
     this.view.setCalculateListener(this);
-    this.view.setTransferToHistoryListener(this);
     this.model = event.getModel();
     this.view.setModel(this.model);
+    this.view.setQuantity(0d);
   }
+
 }

@@ -18,7 +18,7 @@ import org.springframework.context.ApplicationEventPublisher;
 public class HistoryViewImpl extends Composite<VerticalLayout>
     implements HistoryView, AfterNavigationObserver {
 
-  static final String VIEW_NAME = "history";
+  public static final String VIEW_NAME = "history";
 
   private final ApplicationEventPublisher eventPublisher;
   private Grid<HistoryViewModel> historyGrid;

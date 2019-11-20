@@ -11,6 +11,8 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.*;
+import de.pmrd.hackcalculator.history.HistoryView;
+import de.pmrd.hackcalculator.history.HistoryViewImpl;
 import de.pmrd.hackcalculator.layout.DefaultLayout;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -20,7 +22,7 @@ import org.springframework.context.ApplicationEventPublisher;
 public class CalculatorViewImpl extends Composite<VerticalLayout>
     implements CalculatorView, AfterNavigationObserver {
 
-  static final String VIEW_NAME = "calculator";
+  public static final String VIEW_NAME = "calculator";
 
   private final ApplicationEventPublisher eventPublisher;
 
@@ -29,7 +31,7 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
   private NumberField numberOfPersons;
   private NumberField hackPerBun;
   private NumberField bunsPerPerson;
-  private Button transferToHistory;
+  private Button shoppingListBtn;
   private Label result;
 
   public CalculatorViewImpl(
@@ -61,12 +63,12 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
     getContent().add(this.bunsPerPerson);
 
     this.result = new Label();
-    this.result.setVisible(false);
     getContent().add(this.result);
 
-    this.transferToHistory = new Button("übernehmen");
-    this.transferToHistory.setIcon(new Icon(VaadinIcon.CHECK));
-    getContent().add(this.transferToHistory);
+    this.shoppingListBtn = new Button();
+    this.shoppingListBtn.setIcon(new Icon(VaadinIcon.CART));
+    this.shoppingListBtn.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(HistoryViewImpl.VIEW_NAME)));
+    getContent().add(this.shoppingListBtn);
   }
 
   private void bind() {
@@ -87,19 +89,13 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
   }
 
   @Override
-  public void setResult(String text) {
-    this.result.setVisible(true);
-    this.result.setText(text);
+  public void setQuantity(double quantity) {
+    this.result.setText(String.format("Sie benötigen %.1fg feinstes Thüringer Hack!", quantity));
   }
 
   @Override
   public void setCalculateListener(CalculateListener listener) {
     this.binder.addValueChangeListener(e -> listener.calculate());
-  }
-
-  @Override
-  public void setTransferToHistoryListener(TransferToHistoryListener listener) {
-    this.transferToHistory.addClickListener(e -> listener.transfer(binder.getBean()));
   }
 
   @Override

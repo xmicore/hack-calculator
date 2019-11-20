@@ -4,19 +4,13 @@ public interface CalculatorView {
 
   void setCalculateListener(CalculateListener listener);
 
-  void setTransferToHistoryListener(TransferToHistoryListener listener);
-
   void setModel(CalculatorViewModel model);
 
-  void setResult(String text);
+  void setQuantity(double quantity);
 
   interface CalculateListener {
 
     void calculate();
   }
 
-  interface TransferToHistoryListener {
-
-    void transfer(CalculatorViewModel model);
-  }
 }
