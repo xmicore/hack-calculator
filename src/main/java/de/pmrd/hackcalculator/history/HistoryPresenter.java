@@ -41,5 +41,4 @@ public class HistoryPresenter {
   public void init(HistoryViewInitEvent event) {
     view.setHistoryData(getHistoryData());
   }
-
 }
