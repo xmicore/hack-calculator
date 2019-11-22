@@ -3,7 +3,8 @@
   "description": "Calculate the balance between hack and buns.",
   "version": "0.0.1-SNAPSHOT",
   "engines": {
-    "node": "12.13.1"
+    "node": "12.13.1",
+    "npm": "6.12.1"
   },
   "license": "MIT",
   "dependencies": {
