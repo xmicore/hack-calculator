@@ -2,9 +2,12 @@ package de.pmrd.hackcalculator.history;
 
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
+import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -25,8 +28,8 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
 
   public HistoryViewImpl(HistoryPresenter presenter, ApplicationEventPublisher eventPublisher) {
     this.eventPublisher = eventPublisher;
-    presenter.setView(this);
     init();
+    presenter.setView(this);
   }
 
   private void init() {
@@ -38,12 +41,26 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   private void initGrid() {
     historyGrid = new Grid<>();
     historyGrid
-        .addColumn(HistoryViewModel::getHackInGramsPerBroetchen)
-        .setHeader("Hack pro Brötchen");
-    historyGrid.addColumn(HistoryViewModel::getNumberOfBroetchen).setHeader("Brötchen");
-    historyGrid.addColumn(HistoryViewModel::getHackInGramsTotal).setHeader("Hack gesamt");
-    historyGrid.addColumn(HistoryViewModel::getDateSavedToHistory).setHeader("Datum");
+        .addColumn(HistoryViewModel::getHackInGramsPerBroetchen, "buns")
+        .setHeader("Hack pro Brötchen")
+        .setSortable(true);
+    historyGrid
+        .addColumn(HistoryViewModel::getNumberOfBroetchen)
+        .setHeader("Brötchen")
+        .setSortable(true);
+    historyGrid
+        .addColumn(HistoryViewModel::getHackInGramsTotal)
+        .setHeader("Hack gesamt")
+        .setSortable(true);
+    Grid.Column<HistoryViewModel> dateColumn =
+        historyGrid
+            .addColumn(HistoryViewModel::getDateSavedToHistory)
+            .setHeader("Datum")
+            .setSortable(true);
     historyGrid.setMultiSort(true);
+    historyGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+    historyGrid.setColumnReorderingAllowed(true);
+    historyGrid.sort(List.of(new GridSortOrder<>(dateColumn, SortDirection.DESCENDING)));
   }
 
   @Override
