@@ -76,13 +76,13 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
   }
 
   private void bind() {
-    binder.bind(
-        numberOfPersons,
+    this.binder.bind(
+            this.numberOfPersons,
         CalculatorViewModel::getNumberOfPersons,
         CalculatorViewModel::setNumberOfPersons);
-    binder.bind(hackPerBun, CalculatorViewModel::getHackPerBun, CalculatorViewModel::setHackPerBun);
-    binder.bind(
-        bunsPerPerson,
+    this.binder.bind(this.hackPerBun, CalculatorViewModel::getHackPerBun, CalculatorViewModel::setHackPerBun);
+    this.binder.bind(
+            this.bunsPerPerson,
         CalculatorViewModel::getBunsPerPerson,
         CalculatorViewModel::setBunsPerPerson);
   }

@@ -1,12 +1,12 @@
-package de.pmrd.hackcalculator.calculator.service;
+package de.pmrd.hackcalculator.service;
 
-public class CalculateHackData {
+public class CalculatorData {
 
     private double numberOfPersons;
     private double hackPerBun;
     private double bunsPerPerson;
 
-    private CalculateHackData(double numberOfPersons, double hackPerBun, double bunsPerPerson) {
+    private CalculatorData(double numberOfPersons, double hackPerBun, double bunsPerPerson) {
         this.numberOfPersons = numberOfPersons;
         this.hackPerBun = hackPerBun;
         this.bunsPerPerson = bunsPerPerson;
@@ -45,8 +45,8 @@ public class CalculateHackData {
             return this;
         }
 
-        public CalculateHackData build() {
-            return new CalculateHackData(numberOfPersons, hackPerBun, bunsPerPerson);
+        public CalculatorData build() {
+            return new CalculatorData(numberOfPersons, hackPerBun, bunsPerPerson);
         }
     }
 

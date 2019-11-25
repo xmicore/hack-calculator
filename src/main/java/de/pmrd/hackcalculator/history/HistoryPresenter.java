@@ -18,6 +18,11 @@ public class HistoryPresenter {
     this.view = view;
   }
 
+  @EventListener
+  public void init(HistoryViewInitEvent event) {
+    view.setHistoryData(getHistoryData());
+  }
+
   private List<HistoryViewItem> getHistoryData() {
     List<HistoryViewItem> historyItems = new ArrayList<>();
 
@@ -38,8 +43,4 @@ public class HistoryPresenter {
     return historyItems;
   }
 
-  @EventListener
-  public void init(HistoryViewInitEvent event) {
-    view.setHistoryData(getHistoryData());
-  }
 }

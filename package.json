@@ -1,12 +1,12 @@
 {
-  "name": "hack-calculator",
+  "name": "no-name",
   "description": "Calculate the balance between hack and buns.",
   "version": "0.0.1-SNAPSHOT",
   "engines": {
     "node": "12.13.1",
     "npm": "6.12.1"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.2.0",
     "@webcomponents/webcomponentsjs": "^2.2.10",

@@ -2,8 +2,9 @@ package de.pmrd.hackcalculator.calculator;
 
 import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import de.pmrd.hackcalculator.calculator.CalculatorView.CalculateListener;
-import de.pmrd.hackcalculator.calculator.service.CalculateHackData;
-import de.pmrd.hackcalculator.calculator.service.CalculatorService;
+import de.pmrd.hackcalculator.service.HistoryService;
+import de.pmrd.hackcalculator.service.CalculatorData;
+import de.pmrd.hackcalculator.service.CalculatorService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +12,17 @@ import org.springframework.stereotype.Component;
 @VaadinSessionScope
 public class CalculatorPresenter implements CalculateListener {
 
-  private final CalculatorService service;
+  private final CalculatorService calculatorService;
+
+  private final HistoryService historyService;
 
   private CalculatorView view;
 
   private CalculatorViewModel model;
 
-  public CalculatorPresenter(CalculatorService service) {
-    this.service = service;
+  public CalculatorPresenter(CalculatorService calculatorService, HistoryService historyService) {
+    this.calculatorService = calculatorService;
+    this.historyService = historyService;
   }
 
   void setView(CalculatorView view) {
@@ -27,12 +31,12 @@ public class CalculatorPresenter implements CalculateListener {
 
   @Override
   public void calculate() {
-    CalculateHackData data = new CalculateHackData.Builder()
+    CalculatorData data = new CalculatorData.Builder()
             .setBunsPerPerson(model.getBunsPerPerson())
             .setHackPerBun(model.getHackPerBun())
             .setNumberOfPersons(model.getNumberOfPersons())
             .build();
-    final double hack =   service.calculateHack(data);
+    final double hack =   calculatorService.calculateHack(data);
     this.view.setQuantity(hack);
   }
 
