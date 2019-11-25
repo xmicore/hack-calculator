@@ -19,13 +19,23 @@ target/
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+# Testing
+.driver
+.gatling
+error-screenshots
+selenium_standalone_zips
+webdriver/
 
-### VS Code ###
-.vscode/
+# Frontend
+/build-tools/bin/
+/build-tools/etc/
+/build-tools/lib/
+/build-tools/node/
+/build-tools/node_modules/
+/build-tools/yarn.lock
+
+# NPM
+node_modules
+webpack.generated.js
+package-lock.json
+node/
