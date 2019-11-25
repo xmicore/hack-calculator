@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface HistoryView {
 
-  void setHistoryData(List<HistoryViewModel> data);
+  void setHistoryData(List<HistoryViewItem> data);
 }

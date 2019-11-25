@@ -18,22 +18,22 @@ public class HistoryPresenter {
     this.view = view;
   }
 
-  private List<HistoryViewModel> getHistoryData() {
-    List<HistoryViewModel> historyItems = new ArrayList<>();
+  private List<HistoryViewItem> getHistoryData() {
+    List<HistoryViewItem> historyItems = new ArrayList<>();
 
-    HistoryViewModel historyViewModel2 = new HistoryViewModel();
-    historyViewModel2.setDateSavedToHistory(LocalDate.of(2019, 10, 2));
-    historyViewModel2.setHackInGramsPerBroetchen(new BigDecimal(70));
-    historyViewModel2.setNumberOfBroetchen(new BigDecimal(9));
-    historyViewModel2.setHackInGramsTotal(new BigDecimal(700));
+    HistoryViewItem historyViewItem2 = new HistoryViewItem();
+    historyViewItem2.setDateSavedToHistory(LocalDate.of(2019, 10, 2));
+    historyViewItem2.setHackInGramsPerBuns(new BigDecimal(70));
+    historyViewItem2.setNumberOfBuns(new BigDecimal(9));
+    historyViewItem2.setHackInGramsTotal(new BigDecimal(700));
 
-    HistoryViewModel historyViewModel = new HistoryViewModel();
-    historyViewModel.setDateSavedToHistory(LocalDate.now());
-    historyViewModel.setHackInGramsPerBroetchen(new BigDecimal(80));
-    historyViewModel.setNumberOfBroetchen(new BigDecimal(10));
-    historyViewModel.setHackInGramsTotal(new BigDecimal(800));
-    historyItems.add(historyViewModel2);
-    historyItems.add(historyViewModel);
+    HistoryViewItem historyViewItem = new HistoryViewItem();
+    historyViewItem.setDateSavedToHistory(LocalDate.now());
+    historyViewItem.setHackInGramsPerBuns(new BigDecimal(80));
+    historyViewItem.setNumberOfBuns(new BigDecimal(10));
+    historyViewItem.setHackInGramsTotal(new BigDecimal(800));
+    historyItems.add(historyViewItem2);
+    historyItems.add(historyViewItem);
 
     return historyItems;
   }

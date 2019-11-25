@@ -24,7 +24,7 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   static final String VIEW_NAME = "history";
 
   private final ApplicationEventPublisher eventPublisher;
-  private Grid<HistoryViewModel> historyGrid;
+  private Grid<HistoryViewItem> historyGrid;
 
   public HistoryViewImpl(HistoryPresenter presenter, ApplicationEventPublisher eventPublisher) {
     this.eventPublisher = eventPublisher;
@@ -41,20 +41,20 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   private void initGrid() {
     historyGrid = new Grid<>();
     historyGrid
-        .addColumn(HistoryViewModel::getHackInGramsPerBroetchen, "buns")
+        .addColumn(HistoryViewItem::getHackInGramsPerBuns, "buns")
         .setHeader("Hack pro Brötchen")
         .setSortable(true);
     historyGrid
-        .addColumn(HistoryViewModel::getNumberOfBroetchen)
+        .addColumn(HistoryViewItem::getNumberOfBuns)
         .setHeader("Brötchen")
         .setSortable(true);
     historyGrid
-        .addColumn(HistoryViewModel::getHackInGramsTotal)
+        .addColumn(HistoryViewItem::getHackInGramsTotal)
         .setHeader("Hack gesamt")
         .setSortable(true);
-    Grid.Column<HistoryViewModel> dateColumn =
+    Grid.Column<HistoryViewItem> dateColumn =
         historyGrid
-            .addColumn(HistoryViewModel::getDateSavedToHistory)
+            .addColumn(HistoryViewItem::getDateSavedToHistory)
             .setHeader("Datum")
             .setSortable(true);
     historyGrid.setMultiSort(true);
@@ -64,7 +64,7 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   }
 
   @Override
-  public void setHistoryData(List<HistoryViewModel> data) {
+  public void setHistoryData(List<HistoryViewItem> data) {
     historyGrid.setDataProvider(DataProvider.ofCollection(data));
   }
 
