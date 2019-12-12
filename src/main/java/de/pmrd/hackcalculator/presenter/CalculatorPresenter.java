@@ -1,6 +1,5 @@
 package de.pmrd.hackcalculator.presenter;
 
-import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import de.pmrd.hackcalculator.service.CalculatorService;
 import de.pmrd.hackcalculator.service.HistoryService;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
@@ -34,7 +33,7 @@ public class CalculatorPresenter implements CalculateListener, SaveListener {
   @Override
   public void calculate() {
     view.setQuantity(
-        calculatorService.calculateHack(
+        calculatorService.calculateHackTotal(
             model.getNumberOfPersons(), model.getNumberOfBuns(), model.getHackPerBun()));
   }
 
@@ -44,7 +43,7 @@ public class CalculatorPresenter implements CalculateListener, SaveListener {
     historyBackendItem.setHackPerBun(model.getHackPerBun());
     historyBackendItem.setNumberOfBuns(model.getNumberOfBuns());
     historyBackendItem.setNumberOfPersons(model.getNumberOfPersons());
-    historyService.saveHistoryItem(historyBackendItem);
+    historyService.createHistoryItem(historyBackendItem);
     return historyBackendItem.getId().toString();
   }
 

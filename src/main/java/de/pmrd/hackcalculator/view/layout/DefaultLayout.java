@@ -7,10 +7,13 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import de.pmrd.hackcalculator.view.layout.components.Footer;
 import de.pmrd.hackcalculator.view.layout.components.Header;
 import de.pmrd.hackcalculator.view.layout.components.Menu;
 
+@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class DefaultLayout extends Composite<VerticalLayout>
     implements HasComponents, RouterLayout {
 

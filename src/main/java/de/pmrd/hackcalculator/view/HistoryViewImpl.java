@@ -63,7 +63,7 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   private void initGrid() {
     historyGrid = new Grid<>();
     historyGrid
-        .addColumn(HistoryViewItem::getHackInGramsPerBun, "buns")
+        .addColumn(HistoryViewItem::getHackPerBun, "buns")
         .setHeader(getTranslation("view.history.hackPerBun"))
         .setSortable(true);
     historyGrid
@@ -71,12 +71,12 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
         .setHeader(getTranslation("view.history.numberOfBuns"))
         .setSortable(true);
     historyGrid
-        .addColumn(HistoryViewItem::getNumberOfPerson)
-        .setHeader(getTranslation("view.history.numberOfPerson"))
+        .addColumn(HistoryViewItem::getNumberOfPersons)
+        .setHeader(getTranslation("view.history.numberOfPersons"))
         .setSortable(true);
     historyGrid
-        .addColumn(HistoryViewItem::getHackInGramsTotal)
-        .setHeader(getTranslation("view.history.totalHack"))
+        .addColumn(HistoryViewItem::getHackTotal)
+        .setHeader(getTranslation("view.history.hackTotal"))
         .setSortable(true);
     Grid.Column<HistoryViewItem> dateColumn =
         historyGrid

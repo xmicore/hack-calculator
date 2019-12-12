@@ -2,6 +2,7 @@ package de.pmrd.hackcalculator.presenter.converter;
 
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
 import de.pmrd.hackcalculator.view.model.HistoryViewItem;
+import java.math.RoundingMode;
 import java.util.Set;
 import org.springframework.core.convert.ConverterNotFoundException;
 import org.springframework.core.convert.TypeDescriptor;
@@ -38,10 +39,11 @@ public class HistoryConverter implements GenericConverter {
     viewModel.setId(backendModel.getId());
     viewModel.setSavedToHistory(backendModel.getSavedToHistory());
     viewModel.setModified(backendModel.getModified());
-    viewModel.setHackPerBun(backendModel.getHackPerBun());
-    viewModel.setHackInGramsTotal(backendModel.getHackTotal());
-    viewModel.setNumberOfBuns(backendModel.getNumberOfBuns());
-    viewModel.setNumberOfPersons(backendModel.getNumberOfPersons());
+    viewModel.setHackPerBun(backendModel.getHackPerBun().setScale(2, RoundingMode.HALF_UP));
+    viewModel.setHackTotal(backendModel.getHackTotal().setScale(2, RoundingMode.HALF_UP));
+    viewModel.setNumberOfBuns(backendModel.getNumberOfBuns().setScale(1, RoundingMode.HALF_UP));
+    viewModel.setNumberOfPersons(
+        backendModel.getNumberOfPersons().setScale(1, RoundingMode.HALF_UP));
     return viewModel;
   }
 
@@ -50,10 +52,10 @@ public class HistoryConverter implements GenericConverter {
     backendModel.setId(viewModel.getId());
     backendModel.setSavedToHistory(viewModel.getSavedToHistory());
     backendModel.setModified(viewModel.getModified());
-    backendModel.setHackPerBun(viewModel.getHackInGramsPerBun());
-    backendModel.setHackTotal(viewModel.getHackInGramsTotal());
+    backendModel.setHackPerBun(viewModel.getHackPerBun());
+    backendModel.setHackTotal(viewModel.getHackTotal());
     backendModel.setNumberOfBuns(viewModel.getNumberOfBuns());
-    backendModel.setNumberOfPersons(viewModel.getNumberOfPerson());
+    backendModel.setNumberOfPersons(viewModel.getNumberOfPersons());
     return backendModel;
   }
 }

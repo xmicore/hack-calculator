@@ -8,8 +8,8 @@ public class HistoryViewItem {
 
   private UUID id;
   private BigDecimal numberOfBuns;
-  private BigDecimal hackInGramsPerBun;
-  private BigDecimal hackInGramsTotal;
+  private BigDecimal hackPerBun;
+  private BigDecimal hackTOtal;
   private BigDecimal numberOfPerson;
   private LocalDate savedToHistory;
   private LocalDate modified;
@@ -34,20 +34,20 @@ public class HistoryViewItem {
     this.numberOfBuns = numberOfBuns;
   }
 
-  public BigDecimal getHackInGramsPerBun() {
-    return hackInGramsPerBun;
+  public BigDecimal getHackPerBun() {
+    return hackPerBun;
   }
 
   public void setHackPerBun(BigDecimal hackInGramsPerBun) {
-    this.hackInGramsPerBun = hackInGramsPerBun;
+    this.hackPerBun = hackInGramsPerBun;
   }
 
-  public BigDecimal getHackInGramsTotal() {
-    return hackInGramsTotal;
+  public BigDecimal getHackTotal() {
+    return hackTOtal;
   }
 
-  public void setHackInGramsTotal(BigDecimal hackInGramsTotal) {
-    this.hackInGramsTotal = hackInGramsTotal;
+  public void setHackTotal(BigDecimal hackInGramsTotal) {
+    this.hackTOtal = hackInGramsTotal;
   }
 
   public LocalDate getSavedToHistory() {
@@ -66,7 +66,7 @@ public class HistoryViewItem {
     this.modified = modified;
   }
 
-  public BigDecimal getNumberOfPerson() {
+  public BigDecimal getNumberOfPersons() {
     return numberOfPerson;
   }
 

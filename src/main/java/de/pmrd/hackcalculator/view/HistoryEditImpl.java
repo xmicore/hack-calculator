@@ -35,8 +35,8 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
   private Binder<HistoryViewItem> binder = new Binder<>(HistoryViewItem.class);
 
   private NumberField numberOfBuns;
-  private NumberField hackInGramsTotal;
-  private NumberField hackInGramsPerBun;
+  private NumberField numberOfPersons;
+  private NumberField hackTotal;
   private Button saveBtn;
 
   public HistoryEditImpl(HistoryEditPresenter presenter, ApplicationEventPublisher eventPublisher) {
@@ -79,25 +79,24 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
         .bind(HistoryViewItem::getNumberOfBuns, HistoryViewItem::setNumberOfBuns);
     content.add(numberOfBuns);
 
-    hackInGramsTotal = new NumberField(getTranslation("view.history.totalHack"));
-    hackInGramsTotal.setHasControls(true);
-    hackInGramsTotal.setMin(0.5);
-    hackInGramsTotal.setStep(0.5);
+    numberOfPersons = new NumberField(getTranslation("view.history.numberOfPersons"));
+    numberOfPersons.setHasControls(true);
+    numberOfPersons.setMin(0.5);
+    numberOfPersons.setStep(0.5);
     binder
-        .forField(hackInGramsTotal)
+        .forField(numberOfPersons)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
-        .bind(HistoryViewItem::getHackInGramsTotal, HistoryViewItem::setHackPerBun);
-    content.add(hackInGramsTotal);
+        .bind(HistoryViewItem::getNumberOfPersons, HistoryViewItem::setNumberOfPersons);
+    content.add(numberOfPersons);
 
-    hackInGramsPerBun = new NumberField(getTranslation("view.history.hackPerBun"));
-    hackInGramsPerBun.setHasControls(true);
-    hackInGramsPerBun.setMin(1);
-    hackInGramsPerBun.setValueChangeMode(ValueChangeMode.ON_CHANGE);
+    hackTotal = new NumberField(getTranslation("view.history.hackTotal"));
+    hackTotal.setHasControls(true);
+    hackTotal.setMin(1);
     binder
-        .forField(hackInGramsPerBun)
+        .forField(hackTotal)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
-        .bind(HistoryViewItem::getHackInGramsPerBun, HistoryViewItem::setHackPerBun);
-    content.add(hackInGramsPerBun);
+        .bind(HistoryViewItem::getHackTotal, HistoryViewItem::setHackTotal);
+    content.add(hackTotal);
 
     saveBtn = new Button(VaadinIcon.CHECK.create());
     saveBtn.addClickListener(
