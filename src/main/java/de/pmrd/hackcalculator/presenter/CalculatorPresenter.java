@@ -1,5 +1,6 @@
 package de.pmrd.hackcalculator.presenter;
 
+import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import de.pmrd.hackcalculator.service.CalculatorService;
 import de.pmrd.hackcalculator.service.HistoryService;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 @Component
-@RequestScope
+@VaadinSessionScope
 public class CalculatorPresenter implements CalculateListener, SaveListener {
 
   private final CalculatorService calculatorService;
