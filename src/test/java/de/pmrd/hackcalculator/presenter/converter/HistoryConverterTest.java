@@ -33,8 +33,8 @@ public class HistoryConverterTest {
 
     HistoryViewItem viewModel = conversionService.convert(backendModel, HistoryViewItem.class);
 
-    assertEquals(new BigDecimal(800), viewModel.getHackInGramsTotal());
-    assertEquals(new BigDecimal(70.55), viewModel.getHackInGramsPerBun());
+    assertEquals(new BigDecimal(800), viewModel.getHackTotal());
+    assertEquals(new BigDecimal(70.55), viewModel.getHackPerBun());
     assertEquals(new BigDecimal(9), viewModel.getNumberOfBuns());
     assertEquals(now, viewModel.getSavedToHistory());
     assertEquals(tomorrow, viewModel.getModified());

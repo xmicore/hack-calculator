@@ -68,7 +68,7 @@ public class ShoppingListPresenter {
           new ShoppingListViewItemBuilder()
               .setIngredient("Hack")
               .setQuantity(
-                  calculatorService.calculateHack(numberOfPersons, numberOfBuns, hackPerBun))
+                  calculatorService.calculateHackTotal(numberOfPersons, numberOfBuns, hackPerBun))
               .setQuantityUnit(QuantityUnit.GRAM)
               .createItem());
     }
