@@ -1,23 +1,23 @@
 package de.pmrd.hackcalculator.view.layout.components;
 
 import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
-public class Header extends Composite<VerticalLayout> {
+public class Header extends Composite<FlexLayout> {
 
   @Override
-  protected VerticalLayout initContent() {
-    VerticalLayout content = new VerticalLayout();
+  protected FlexLayout initContent() {
+    FlexLayout content = new FlexLayout();
     Icon piggy = VaadinIcon.PIGGY_BANK.create();
     piggy.setColor("#FF69B4");
-    piggy.setSize("2em");
-    content.add(new H1(new Label("Hack "), piggy, new Label(" Calculator")));
-    content.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
+    piggy.setSize("1.5em");
+    content.add(new H2(new Label("Hack "), piggy, new Label(" Calculator")));
+    content.setAlignSelf(Alignment.CENTER);
     return content;
   }
 }
