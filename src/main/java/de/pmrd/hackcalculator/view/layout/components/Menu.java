@@ -1,18 +1,20 @@
 package de.pmrd.hackcalculator.view.layout.components;
 
 import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 import de.pmrd.hackcalculator.view.CalculatorViewImpl;
 import de.pmrd.hackcalculator.view.HistoryViewImpl;
 
-public class Menu extends Composite<HorizontalLayout> {
+public class Menu extends Composite<Tabs> {
 
   @Override
-  protected HorizontalLayout initContent() {
-    HorizontalLayout content = new HorizontalLayout();
-    content.add(new RouterLink("Berechnung", CalculatorViewImpl.class));
-    content.add(new RouterLink("Historie", HistoryViewImpl.class));
-    return content;
+  protected Tabs initContent() {
+    final Tab calculationTab = new Tab(new RouterLink("Berechnung", CalculatorViewImpl.class));
+    final Tab historyTab = new Tab(new RouterLink("Historie", HistoryViewImpl.class));
+    final Tabs tabs = new Tabs(calculationTab, historyTab);
+    tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
+    return tabs;
   }
 }
