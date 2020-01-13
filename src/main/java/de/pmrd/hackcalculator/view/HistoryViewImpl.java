@@ -30,6 +30,13 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
     implements HistoryView, AfterNavigationObserver, HasDynamicTitle {
 
   private final ApplicationEventPublisher eventPublisher;
+  private Grid.Column<HistoryViewItem> hackPerBunCol;
+  private Grid.Column<HistoryViewItem> bunsCol;
+  private Grid.Column<HistoryViewItem> personCol;
+  private Grid.Column<HistoryViewItem> hackTotalCol;
+  private Grid.Column<HistoryViewItem> savedToHistoryCol;
+  private Grid.Column<HistoryViewItem> modifiedCol;
+  private Grid.Column<HistoryViewItem> editCol;
   private Grid<HistoryViewItem> historyGrid;
 
   public HistoryViewImpl(HistoryPresenter presenter, ApplicationEventPublisher eventPublisher) {
@@ -57,47 +64,52 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
     VerticalLayout content = new VerticalLayout();
     content.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
     initGrid();
+    adjustGridToDevice();
     content.add(historyGrid);
     return content;
   }
 
   private void initGrid() {
     historyGrid = new Grid<>();
-    historyGrid
-        .addColumn(HistoryViewItem::getHackPerBun, "buns")
-        .setHeader(getTranslation("view.history.hackPerBun"))
-        .setSortable(true);
-    historyGrid
-        .addColumn(HistoryViewItem::getNumberOfBuns)
-        .setHeader(getTranslation("view.history.numberOfBuns"))
-        .setSortable(true);
-    historyGrid
-        .addColumn(HistoryViewItem::getNumberOfPersons)
-        .setHeader(getTranslation("view.history.numberOfPersons"))
-        .setSortable(true);
-    historyGrid
-        .addColumn(HistoryViewItem::getHackTotal)
-        .setHeader(getTranslation("view.history.hackTotal"))
-        .setSortable(true);
-    Grid.Column<HistoryViewItem> dateColumn =
+    hackPerBunCol =
+        historyGrid
+            .addColumn(HistoryViewItem::getHackPerBun, "buns")
+            .setHeader(getTranslation("view.history.hackPerBun"))
+            .setSortable(true);
+    bunsCol =
+        historyGrid
+            .addColumn(HistoryViewItem::getNumberOfBuns)
+            .setHeader(getTranslation("view.history.numberOfBuns"))
+            .setSortable(true);
+    personCol =
+        historyGrid
+            .addColumn(HistoryViewItem::getNumberOfPersons)
+            .setHeader(getTranslation("view.history.numberOfPersons"))
+            .setSortable(true);
+    hackTotalCol =
+        historyGrid
+            .addColumn(HistoryViewItem::getHackTotal)
+            .setHeader(getTranslation("view.history.hackTotal"))
+            .setSortable(true);
+    savedToHistoryCol =
         historyGrid
             .addColumn(HistoryViewItem::getSavedToHistory)
             .setHeader(getTranslation("view.history.dateSaved"))
             .setSortable(true);
-    historyGrid
-        .addColumn(HistoryViewItem::getModified)
-        .setHeader(getTranslation("view.history.dateModified"));
-    historyGrid.addColumn(new ComponentRenderer<>(this::getEditButton));
-    historyGrid
-        .getColumns()
-        .forEach(
-            column -> {
-              column.setAutoWidth(true);
-            });
+    modifiedCol =
+        historyGrid
+            .addColumn(HistoryViewItem::getModified)
+            .setHeader(getTranslation("view.history.dateModified"));
+    editCol = historyGrid.addColumn(new ComponentRenderer<>(this::getEditButton));
+
     historyGrid.setMultiSort(true);
     historyGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     historyGrid.setColumnReorderingAllowed(true);
-    historyGrid.sort(List.of(new GridSortOrder<>(dateColumn, SortDirection.DESCENDING)));
+    historyGrid.getColumns().forEach(column -> column.setAutoWidth(true));
+    historyGrid.sort(List.of(new GridSortOrder<>(savedToHistoryCol, SortDirection.DESCENDING)));
+  }
+
+  private void adjustGridToDevice() {
     UI.getCurrent()
         .getPage()
         .retrieveExtendedClientDetails(
@@ -116,12 +128,13 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   }
 
   private void makeGridResponsive() {
-    historyGrid.getColumns().get(0).setVisible(false);
-    historyGrid.getColumns().get(2).setVisible(false);
-    historyGrid.getColumns().get(5).setVisible(false);
-    historyGrid.getColumns().get(1).setHeader(VaadinIcon.MENU.create());
-    historyGrid.getColumns().get(3).setHeader(VaadinIcon.PIGGY_BANK.create());
-    historyGrid.getColumns().get(4).setHeader(VaadinIcon.CLOCK.create());
-    historyGrid.getColumns().get(6).setHeader(VaadinIcon.EDIT.create());
+    hackPerBunCol.setVisible(false);
+    bunsCol.setVisible(false);
+    personCol.setVisible(false);
+    modifiedCol.setVisible(false);
+    modifiedCol.setVisible(false);
+    hackTotalCol.setHeader(VaadinIcon.PIGGY_BANK.create());
+    savedToHistoryCol.setHeader(VaadinIcon.CLOCK.create());
+    editCol.setHeader(VaadinIcon.EDIT.create());
   }
 }
