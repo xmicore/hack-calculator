@@ -12,7 +12,6 @@ import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 import java.math.BigDecimal;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 
 @Component
 @VaadinSessionScope

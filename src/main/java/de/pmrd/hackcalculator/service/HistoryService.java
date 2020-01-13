@@ -45,7 +45,7 @@ public class HistoryService {
   }
 
   public void createHistoryItem(HistoryBackendItem item) {
-    item.setModified(LocalDate.now());
+    item.setSavedToHistory(LocalDate.now());
     historyItems.put(item.getId(), item);
   }
 
