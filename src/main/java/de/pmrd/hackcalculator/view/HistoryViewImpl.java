@@ -1,6 +1,7 @@
 package de.pmrd.hackcalculator.view;
 
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridSortOrder;
@@ -85,23 +86,42 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
             .setSortable(true);
     historyGrid
         .addColumn(HistoryViewItem::getModified)
-        .setHeader(getTranslation("view.history.dateModified"))
-        .setSortable(true);
+        .setHeader(getTranslation("view.history.dateModified"));
+    historyGrid.addColumn(new ComponentRenderer<>(this::getEditButton));
     historyGrid
-        .addColumn(new ComponentRenderer<>(this::getEditButton));
+        .getColumns()
+        .forEach(
+            column -> {
+              column.setAutoWidth(true);
+            });
     historyGrid.setMultiSort(true);
     historyGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     historyGrid.setColumnReorderingAllowed(true);
     historyGrid.sort(List.of(new GridSortOrder<>(dateColumn, SortDirection.DESCENDING)));
+    UI.getCurrent()
+        .getPage()
+        .retrieveExtendedClientDetails(
+            details -> {
+              if (details.getScreenWidth() < 720) {
+                makeGridResponsive();
+              }
+            });
   }
 
   private Button getEditButton(HistoryViewItem item) {
     Button editBtn = new Button(VaadinIcon.EDIT.create());
     editBtn.addClickListener(
-        e ->
-            getUI()
-                .ifPresent(
-                    ui -> ui.navigate(HistoryEditImpl.class, item.getId().toString())));
+        e -> getUI().ifPresent(ui -> ui.navigate(HistoryEditImpl.class, item.getId().toString())));
     return editBtn;
+  }
+
+  private void makeGridResponsive() {
+    historyGrid.getColumns().get(0).setVisible(false);
+    historyGrid.getColumns().get(2).setVisible(false);
+    historyGrid.getColumns().get(5).setVisible(false);
+    historyGrid.getColumns().get(1).setHeader(VaadinIcon.MENU.create());
+    historyGrid.getColumns().get(3).setHeader(VaadinIcon.PIGGY_BANK.create());
+    historyGrid.getColumns().get(4).setHeader(VaadinIcon.CLOCK.create());
+    historyGrid.getColumns().get(6).setHeader(VaadinIcon.EDIT.create());
   }
 }
