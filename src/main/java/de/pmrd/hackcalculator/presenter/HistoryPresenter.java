@@ -1,18 +1,18 @@
 package de.pmrd.hackcalculator.presenter;
 
-import com.vaadin.flow.spring.annotation.VaadinSessionScope;
-import de.pmrd.hackcalculator.view.model.HistoryViewItem;
 import de.pmrd.hackcalculator.service.HistoryService;
 import de.pmrd.hackcalculator.view.contracts.HistoryView;
 import de.pmrd.hackcalculator.view.events.HistoryViewInitEvent;
+import de.pmrd.hackcalculator.view.model.HistoryViewItem;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Component
-@VaadinSessionScope
+@SessionScope
 public class HistoryPresenter {
 
   private final ConversionService converter;

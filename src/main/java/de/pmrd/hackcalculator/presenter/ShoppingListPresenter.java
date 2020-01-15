@@ -1,6 +1,5 @@
 package de.pmrd.hackcalculator.presenter;
 
-import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import de.pmrd.hackcalculator.service.CalculatorService;
 import de.pmrd.hackcalculator.service.HistoryService;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
@@ -17,9 +16,10 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Component
-@VaadinSessionScope
+@RequestScope
 public class ShoppingListPresenter {
 
   private final CalculatorService calculatorService;
@@ -47,7 +47,7 @@ public class ShoppingListPresenter {
 
   @EventListener
   public void init(ShoppingListViewInitEvent event) {
-    view.setItems(this.model.getShoppingListItems());
+    view.setItems(model.getShoppingListItems());
   }
 
   private List<ShoppingListViewItem> createShoppingListItems(String uuid) {
