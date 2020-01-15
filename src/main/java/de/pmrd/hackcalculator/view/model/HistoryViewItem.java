@@ -9,7 +9,7 @@ public class HistoryViewItem {
   private UUID id;
   private BigDecimal numberOfBuns;
   private BigDecimal hackPerBun;
-  private BigDecimal hackTOtal;
+  private BigDecimal hackTotal;
   private BigDecimal numberOfPerson;
   private LocalDate savedToHistory;
   private LocalDate modified;
@@ -43,11 +43,11 @@ public class HistoryViewItem {
   }
 
   public BigDecimal getHackTotal() {
-    return hackTOtal;
+    return hackTotal;
   }
 
   public void setHackTotal(BigDecimal hackInGramsTotal) {
-    this.hackTOtal = hackInGramsTotal;
+    this.hackTotal = hackInGramsTotal;
   }
 
   public LocalDate getSavedToHistory() {

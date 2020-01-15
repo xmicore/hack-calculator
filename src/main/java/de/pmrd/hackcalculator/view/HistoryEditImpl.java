@@ -7,12 +7,12 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.presenter.HistoryEditPresenter;
 import de.pmrd.hackcalculator.view.contracts.HistoryEditView;
@@ -55,7 +55,7 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
   }
 
   @Override
-  public void setParameter(BeforeEvent beforeEvent, String uuid) {
+  public void setParameter(BeforeEvent beforeEvent, @OptionalParameter String uuid) {
     eventPublisher.publishEvent(new HistoryEditViewBeforeInitEvent(this, UUID.fromString(uuid)));
   }
 
@@ -73,6 +73,7 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
     numberOfBuns.setHasControls(true);
     numberOfBuns.setMin(5);
     numberOfBuns.setStep(5);
+    numberOfBuns.setMinWidth("15em");
     binder
         .forField(numberOfBuns)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
@@ -83,6 +84,7 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
     numberOfPersons.setHasControls(true);
     numberOfPersons.setMin(0.5);
     numberOfPersons.setStep(0.5);
+    numberOfPersons.setMinWidth("15em");
     binder
         .forField(numberOfPersons)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
@@ -92,6 +94,7 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
     hackTotal = new NumberField(getTranslation("view.history.hackTotal"));
     hackTotal.setHasControls(true);
     hackTotal.setMin(1);
+    hackTotal.setMinWidth("15em");
     binder
         .forField(hackTotal)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)

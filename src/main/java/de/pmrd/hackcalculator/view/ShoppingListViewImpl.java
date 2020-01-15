@@ -11,6 +11,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.presenter.ShoppingListPresenter;
 import de.pmrd.hackcalculator.view.contracts.ShoppingListView;
@@ -46,7 +47,7 @@ public class ShoppingListViewImpl extends Composite<VerticalLayout>
   }
 
   @Override
-  public void setParameter(BeforeEvent beforeEvent, String uuid) {
+  public void setParameter(BeforeEvent beforeEvent, @OptionalParameter String uuid) {
     eventPublisher.publishEvent(new ShoppingListViewBeforeInitEvent(this, uuid));
   }
 
