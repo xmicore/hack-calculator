@@ -39,11 +39,19 @@ public class HistoryConverter implements GenericConverter {
     viewModel.setId(backendModel.getId());
     viewModel.setSavedToHistory(backendModel.getSavedToHistory());
     viewModel.setModified(backendModel.getModified());
-    viewModel.setHackPerBun(backendModel.getHackPerBun().setScale(2, RoundingMode.HALF_UP));
-    viewModel.setHackTotal(backendModel.getHackTotal().setScale(2, RoundingMode.HALF_UP));
-    viewModel.setNumberOfBuns(backendModel.getNumberOfBuns().setScale(1, RoundingMode.HALF_UP));
-    viewModel.setNumberOfPersons(
-        backendModel.getNumberOfPersons().setScale(1, RoundingMode.HALF_UP));
+    if (backendModel.getHackPerBun() != null) {
+      viewModel.setHackPerBun(backendModel.getHackPerBun().setScale(2, RoundingMode.HALF_UP));
+    }
+    if (backendModel.getHackTotal() != null) {
+      viewModel.setHackTotal(backendModel.getHackTotal().setScale(2, RoundingMode.HALF_UP));
+    }
+    if (backendModel.getNumberOfBuns() != null) {
+      viewModel.setNumberOfBuns(backendModel.getNumberOfBuns().setScale(1, RoundingMode.HALF_UP));
+    }
+    if (backendModel.getNumberOfPersons() != null) {
+      viewModel.setNumberOfPersons(
+          backendModel.getNumberOfPersons().setScale(1, RoundingMode.HALF_UP));
+    }
     return viewModel;
   }
 

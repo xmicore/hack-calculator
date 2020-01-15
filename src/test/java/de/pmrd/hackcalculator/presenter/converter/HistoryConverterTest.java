@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
 import de.pmrd.hackcalculator.view.model.HistoryViewItem;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,13 +30,19 @@ public class HistoryConverterTest {
     backendModel.setNumberOfBuns(new BigDecimal(9));
     backendModel.setSavedToHistory(now);
     backendModel.setModified(tomorrow);
+    backendModel.setNumberOfPersons(new BigDecimal(3));
     backendModel.setUser("JohnDoe");
 
     HistoryViewItem viewModel = conversionService.convert(backendModel, HistoryViewItem.class);
 
-    assertEquals(new BigDecimal(800), viewModel.getHackTotal());
-    assertEquals(new BigDecimal(70.55), viewModel.getHackPerBun());
-    assertEquals(new BigDecimal(9), viewModel.getNumberOfBuns());
+    assertEquals(
+        new BigDecimal(800.00).setScale(2, RoundingMode.HALF_UP), viewModel.getHackTotal());
+    assertEquals(
+        new BigDecimal(70.55).setScale(2, RoundingMode.HALF_UP), viewModel.getHackPerBun());
+    assertEquals(
+        new BigDecimal(9.0).setScale(1, RoundingMode.HALF_UP), viewModel.getNumberOfBuns());
+    assertEquals(
+        new BigDecimal(3).setScale(1, RoundingMode.HALF_UP), viewModel.getNumberOfPersons());
     assertEquals(now, viewModel.getSavedToHistory());
     assertEquals(tomorrow, viewModel.getModified());
   }
