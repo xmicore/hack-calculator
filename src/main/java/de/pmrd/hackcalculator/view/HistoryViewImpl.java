@@ -104,6 +104,7 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
 
     historyGrid.setMultiSort(true);
     historyGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+    historyGrid.setHeightByRows(true);
     historyGrid.setColumnReorderingAllowed(true);
     historyGrid.getColumns().forEach(column -> column.setAutoWidth(true));
     historyGrid.sort(List.of(new GridSortOrder<>(savedToHistoryCol, SortDirection.DESCENDING)));
@@ -123,7 +124,9 @@ public class HistoryViewImpl extends Composite<VerticalLayout>
   private Button getEditButton(HistoryViewItem item) {
     Button editBtn = new Button(VaadinIcon.EDIT.create());
     editBtn.addClickListener(
-        e -> getUI().ifPresent(ui -> ui.navigate(HistoryEditImpl.class, item.getId().toString())));
+        e ->
+            getUI()
+                .ifPresent(ui -> ui.navigate(HistoryEditViewImpl.class, item.getId().toString())));
     return editBtn;
   }
 

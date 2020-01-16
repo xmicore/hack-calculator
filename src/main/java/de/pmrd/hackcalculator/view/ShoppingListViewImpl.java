@@ -1,8 +1,11 @@
 package de.pmrd.hackcalculator.view;
 
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.renderer.TextRenderer;
@@ -14,6 +17,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import de.pmrd.hackcalculator.presenter.ShoppingListPresenter;
+import de.pmrd.hackcalculator.view.contracts.CalculatorView;
 import de.pmrd.hackcalculator.view.contracts.ShoppingListView;
 import de.pmrd.hackcalculator.view.events.ShoppingListViewBeforeInitEvent;
 import de.pmrd.hackcalculator.view.events.ShoppingListViewInitEvent;
@@ -59,6 +63,16 @@ public class ShoppingListViewImpl extends Composite<VerticalLayout>
   @Override
   protected VerticalLayout initContent() {
     VerticalLayout content = new VerticalLayout();
+    initGrid();
+    Button backBtn = new Button(VaadinIcon.ARROW_BACKWARD.create());
+    backBtn.addClickListener(e -> UI.getCurrent().navigate(CalculatorView.VIEW_NAME));
+
+    content.add(backBtn, grid);
+
+    return content;
+  }
+
+  private void initGrid() {
     grid = new Grid<>();
     grid.addColumn(ShoppingListViewItem::getIngredient)
         .setHeader(getTranslation("view.shoppingList.ingredient"));
@@ -68,8 +82,6 @@ public class ShoppingListViewImpl extends Composite<VerticalLayout>
         .setHeader(getTranslation("view.shoppingList.quantityUnit"));
 
     grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
-    content.add(grid);
-
-    return content;
+    grid.setHeightByRows(true);
   }
 }

@@ -4,6 +4,7 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
@@ -27,7 +28,7 @@ import java.util.UUID;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Route(value = HistoryEditView.VIEW_NAME, layout = DefaultLayout.class)
-public class HistoryEditImpl extends Composite<VerticalLayout>
+public class HistoryEditViewImpl extends Composite<VerticalLayout>
     implements HistoryEditView, HasDynamicTitle, HasUrlParameter<String>, AfterNavigationObserver {
 
   private final ApplicationEventPublisher eventPublisher;
@@ -38,8 +39,10 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
   private NumberField numberOfPersons;
   private NumberField hackTotal;
   private Button saveBtn;
+  private Button cancelBtn;
 
-  public HistoryEditImpl(HistoryEditPresenter presenter, ApplicationEventPublisher eventPublisher) {
+  public HistoryEditViewImpl(
+      HistoryEditPresenter presenter, ApplicationEventPublisher eventPublisher) {
     this.eventPublisher = eventPublisher;
     presenter.setView(this);
   }
@@ -69,6 +72,17 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
     VerticalLayout content = new VerticalLayout();
     content.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
+    initBuns();
+    initNumberOfPersons();
+    initHackTotal();
+    initSaveBtn();
+    initCancelBtn();
+
+    content.add(numberOfBuns, numberOfPersons, hackTotal, getControls());
+    return content;
+  }
+
+  private void initBuns() {
     numberOfBuns = new NumberField(getTranslation("view.history.numberOfBuns"));
     numberOfBuns.setHasControls(true);
     numberOfBuns.setMin(5);
@@ -78,8 +92,9 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
         .forField(numberOfBuns)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
         .bind(HistoryViewItem::getNumberOfBuns, HistoryViewItem::setNumberOfBuns);
-    content.add(numberOfBuns);
+  }
 
+  private void initNumberOfPersons() {
     numberOfPersons = new NumberField(getTranslation("view.history.numberOfPersons"));
     numberOfPersons.setHasControls(true);
     numberOfPersons.setMin(0.5);
@@ -89,8 +104,9 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
         .forField(numberOfPersons)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
         .bind(HistoryViewItem::getNumberOfPersons, HistoryViewItem::setNumberOfPersons);
-    content.add(numberOfPersons);
+  }
 
+  private void initHackTotal() {
     hackTotal = new NumberField(getTranslation("view.history.hackTotal"));
     hackTotal.setHasControls(true);
     hackTotal.setMin(1);
@@ -99,16 +115,30 @@ public class HistoryEditImpl extends Composite<VerticalLayout>
         .forField(hackTotal)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
         .bind(HistoryViewItem::getHackTotal, HistoryViewItem::setHackTotal);
-    content.add(hackTotal);
+  }
 
+  private void initSaveBtn() {
     saveBtn = new Button(VaadinIcon.CHECK.create());
     saveBtn.addClickListener(
         e -> {
           eventPublisher.publishEvent(new HistoryUpdateEvent(this, binder.getBean()));
-          getUI().ifPresent(ui -> ui.navigate(HistoryView.VIEW_NAME));
+          navigateToHistoryView();
         });
-    content.add(saveBtn);
+  }
 
-    return content;
+
+  private void initCancelBtn() {
+    cancelBtn = new Button(VaadinIcon.CLOSE_CIRCLE_O.create());
+    cancelBtn.addClickListener(e -> navigateToHistoryView());
+  }
+
+  private void navigateToHistoryView() {
+    getUI().ifPresent(ui -> ui.navigate(HistoryView.VIEW_NAME));
+  }
+
+  private HorizontalLayout getControls() {
+    HorizontalLayout controls = new HorizontalLayout(saveBtn, cancelBtn);
+    controls.setAlignItems(FlexComponent.Alignment.CENTER);
+    return controls;
   }
 }
