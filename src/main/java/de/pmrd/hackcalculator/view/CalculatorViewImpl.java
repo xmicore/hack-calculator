@@ -14,6 +14,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.PWA;
 import de.pmrd.hackcalculator.presenter.CalculatorPresenter;
 import de.pmrd.hackcalculator.view.contracts.CalculatorView;
 import de.pmrd.hackcalculator.view.events.CalculatorViewInitEvent;
@@ -22,6 +23,7 @@ import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
 import java.math.BigDecimal;
 import org.springframework.context.ApplicationEventPublisher;
 
+@PWA(name = "Hack-Calculator", shortName = "Hacki")
 @Route(value = CalculatorView.VIEW_NAME, layout = DefaultLayout.class)
 @RouteAlias(value = "", layout = DefaultLayout.class)
 public class CalculatorViewImpl extends Composite<VerticalLayout>

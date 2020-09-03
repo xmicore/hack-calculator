@@ -34,9 +34,10 @@ public class HistoryEditPresenter {
 
   @EventListener
   public void beforeInit(HistoryEditViewBeforeInitEvent event) {
-    final HistoryBackendItem backendItem = backend.getHistoryItem(event.getItemId());
-    final HistoryViewItem viewItem = converter.convert(backendItem, HistoryViewItem.class);
-    model.setItem(viewItem);
+    backend
+        .getHistoryItem(event.getItemId())
+        .map(e -> converter.convert(e, HistoryViewItem.class))
+        .ifPresent(e -> model.setItem(e));
   }
 
   @EventListener
