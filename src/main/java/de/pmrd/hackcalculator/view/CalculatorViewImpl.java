@@ -2,6 +2,7 @@ package de.pmrd.hackcalculator.view;
 
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -26,6 +27,7 @@ import org.springframework.context.ApplicationEventPublisher;
 @PWA(name = "Hack-Calculator", shortName = "Hacki")
 @Route(value = CalculatorView.VIEW_NAME, layout = DefaultLayout.class)
 @RouteAlias(value = "", layout = DefaultLayout.class)
+@CssImport("./styles/shared-styles.css")
 public class CalculatorViewImpl extends Composite<VerticalLayout>
     implements CalculatorView, AfterNavigationObserver, HasDynamicTitle {
 

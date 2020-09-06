@@ -1,0 +1,7 @@
+.branding > * {
+    margin: var(--lumo-space-s) var(--lumo-space-xs);
+}
+
+.piggy {
+    color: rgb(255, 105, 180);
+}
