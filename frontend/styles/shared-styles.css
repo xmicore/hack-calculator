@@ -5,3 +5,13 @@
 .piggy {
     color: rgb(255, 105, 180);
 }
+
+.shoppinglist__summary {
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.shoppinglist__summary > * {
+    padding: var(--lumo-space-xs);
+    width: 10rem;
+}

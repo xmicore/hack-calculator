@@ -42,36 +42,41 @@ public class ShoppingListPresenter {
 
   @EventListener
   public void beforeInit(ShoppingListViewBeforeInitEvent event) {
-    model.setShoppingListItems(createShoppingListItems(event.getUuid()));
+    model = createShoppingListItems(event.getUuid());
   }
 
   @EventListener
   public void init(ShoppingListViewInitEvent event) {
-    view.setItems(model.getShoppingListItems());
+    view.setModel(model);
   }
 
-  private List<ShoppingListViewItem> createShoppingListItems(String uuid) {
+  private ShoppingListViewModel createShoppingListItems(String uuid) {
+    ShoppingListViewModel shoppingList = new ShoppingListViewModel();
     List<ShoppingListViewItem> items = new ArrayList<>();
     Optional<HistoryBackendItem> historyItemOpt = historyService.getHistoryItem(uuid);
     if (historyItemOpt.isPresent()) {
       HistoryBackendItem historyItem = historyItemOpt.get();
       BigDecimal numberOfPersons = historyItem.getNumberOfPersons();
-      BigDecimal numberOfBuns = historyItem.getNumberOfBuns();
+      BigDecimal bunsPerPerson = historyItem.getNumberOfBuns();
       BigDecimal hackPerBun = historyItem.getHackPerBun();
       items.add(
           new ShoppingListViewItemBuilder()
               .setIngredient("Brötchen")
-              .setQuantity(calculatorService.calculateBuns(numberOfPersons, numberOfBuns))
+              .setQuantity(calculatorService.calculateBuns(numberOfPersons, bunsPerPerson))
               .setQuantityUnit(QuantityUnit.CHUNK)
               .createItem());
       items.add(
           new ShoppingListViewItemBuilder()
               .setIngredient("Hack")
               .setQuantity(
-                  calculatorService.calculateHackTotal(numberOfPersons, numberOfBuns, hackPerBun))
+                  calculatorService.calculateHackTotal(numberOfPersons, bunsPerPerson, hackPerBun))
               .setQuantityUnit(QuantityUnit.GRAM)
               .createItem());
+      shoppingList.setBunsPerPerson(bunsPerPerson);
+      shoppingList.setHackPerBun(hackPerBun);
+      shoppingList.setNumberOfPersons(numberOfPersons);
     }
-    return items;
+    shoppingList.setShoppingListItems(items);
+    return shoppingList;
   }
 }
