@@ -13,5 +13,11 @@
 
 .shoppinglist__summary > * {
     padding: var(--lumo-space-xs);
+    padding-left: 0;
+    width: 10rem;
+}
+
+.shoppinglist__summary > * + * {
+    padding: var(--lumo-space-xs);
     width: 10rem;
 }
