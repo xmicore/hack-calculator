@@ -1,9 +1,15 @@
-.branding > * {
-    margin: var(--lumo-space-s) var(--lumo-space-xs);
+.branding_label {
+    padding: 0.5rem 0;
 }
 
-.piggy {
-    color: rgb(255, 105, 180);
+.branding__logo {
+    padding: 0.5rem;
+}
+
+.branding__logo > img {
+    width: auto;
+    height: var(--lumo-font-size-xl);
+    vertical-align: middle;
 }
 
 .shoppinglist__summary {
