@@ -13,12 +13,10 @@ public class HistoryBackendItem {
   private BigDecimal numberOfPersons;
   private LocalDate savedToHistory;
   private LocalDate modified;
-  private String user;
 
   public HistoryBackendItem() {
     id = UUID.randomUUID();
     savedToHistory = LocalDate.now();
-    user = "";
   }
 
   public HistoryBackendItem(
@@ -28,8 +26,7 @@ public class HistoryBackendItem {
       BigDecimal hackTotal,
       BigDecimal numberOfPersons,
       LocalDate savedToHistory,
-      LocalDate modified,
-      String user) {
+      LocalDate modified) {
     this.id = id;
     this.numberOfBuns = numberOfBuns;
     this.hackPerBun = hackPerBun;
@@ -37,7 +34,6 @@ public class HistoryBackendItem {
     this.numberOfPersons = numberOfPersons;
     this.savedToHistory = savedToHistory;
     this.modified = modified;
-    this.user = user;
   }
 
   public UUID getId() {
@@ -96,11 +92,4 @@ public class HistoryBackendItem {
     this.numberOfPersons = numberOfPerson;
   }
 
-  public String getUser() {
-    return user;
-  }
-
-  public void setUser(String user) {
-    this.user = user;
-  }
 }

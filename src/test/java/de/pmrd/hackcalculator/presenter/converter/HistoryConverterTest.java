@@ -31,7 +31,6 @@ public class HistoryConverterTest {
     backendModel.setSavedToHistory(now);
     backendModel.setModified(tomorrow);
     backendModel.setNumberOfPersons(new BigDecimal(3));
-    backendModel.setUser("JohnDoe");
 
     HistoryViewItem viewModel = conversionService.convert(backendModel, HistoryViewItem.class);
 

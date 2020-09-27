@@ -1,14 +1,12 @@
 package de.pmrd.hackcalculator.history.jpa.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(name = HistoryItemJpaEntity.TABLE_NAME)
 @NamedQueries(
     @NamedQuery(
         name = HistoryItemJpaEntity.FIND_ALL,
@@ -16,6 +14,7 @@ import java.util.UUID;
 public class HistoryItemJpaEntity {
 
   public static final String FIND_ALL = "HistoryItem.findAll";
+  public static final String TABLE_NAME = "HCK_HISTORY_ITEMS";
 
   @Id private UUID id;
   private BigDecimal numberOfBuns;
@@ -24,7 +23,6 @@ public class HistoryItemJpaEntity {
   private BigDecimal numberOfPersons;
   private LocalDate savedToHistory;
   private LocalDate modified;
-  private String user;
 
   public HistoryItemJpaEntity() {}
 
@@ -35,8 +33,7 @@ public class HistoryItemJpaEntity {
       BigDecimal hackTotal,
       BigDecimal numberOfPersons,
       LocalDate savedToHistory,
-      LocalDate modified,
-      String user) {
+      LocalDate modified) {
     this.id = id;
     this.numberOfBuns = numberOfBuns;
     this.hackPerBun = hackPerBun;
@@ -44,7 +41,6 @@ public class HistoryItemJpaEntity {
     this.numberOfPersons = numberOfPersons;
     this.savedToHistory = savedToHistory;
     this.modified = modified;
-    this.user = user;
   }
 
   public UUID getId() {
@@ -103,11 +99,4 @@ public class HistoryItemJpaEntity {
     this.modified = modified;
   }
 
-  public String getUser() {
-    return user;
-  }
-
-  public void setUser(String user) {
-    this.user = user;
-  }
 }

@@ -63,7 +63,6 @@ public class HistoryItemJpaRepository implements HistoryItemRepository {
               entity.setNumberOfBuns(item.getNumberOfBuns());
               entity.setNumberOfPersons(item.getNumberOfPersons());
               entity.setSavedToHistory(item.getSavedToHistory());
-              entity.setUser(item.getUser());
             });
   }
 
@@ -75,8 +74,7 @@ public class HistoryItemJpaRepository implements HistoryItemRepository {
         entity.getHackTotal(),
         entity.getNumberOfPersons(),
         entity.getSavedToHistory(),
-        entity.getModified(),
-        entity.getUser());
+        entity.getModified());
   }
 
   private HistoryItemJpaEntity toEntity(HistoryBackendItem domain) {
@@ -87,7 +85,6 @@ public class HistoryItemJpaRepository implements HistoryItemRepository {
         domain.getHackTotal(),
         domain.getNumberOfPersons(),
         domain.getSavedToHistory(),
-        domain.getModified(),
-        domain.getUser());
+        domain.getModified());
   }
 }
