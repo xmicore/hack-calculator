@@ -1,4 +1,4 @@
-package de.pmrd.hackcalculator.history.jpa.model;
+package de.pmrd.hackcalculator.repositories.history.jpa.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

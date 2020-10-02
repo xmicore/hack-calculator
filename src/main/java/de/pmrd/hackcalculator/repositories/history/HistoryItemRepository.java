@@ -1,7 +1,6 @@
-package de.pmrd.hackcalculator.history;
+package de.pmrd.hackcalculator.repositories.history;
 
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Optional;

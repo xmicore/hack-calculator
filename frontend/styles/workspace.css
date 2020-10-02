@@ -1,0 +1,22 @@
+.workspace {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    background: linear-gradient(0deg, #efefef 50%, #ffffff 50%);
+}
+
+.workspace > h1 {
+    margin-bottom: 3rem;
+}
+
+.workspace > vaadin-text-field,
+.workspace > vaadin-button {
+    width: 15rem;
+}
+
+.workspace > img {
+    max-width: 256px;
+}

@@ -10,9 +10,10 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import de.pmrd.hackcalculator.view.layout.components.Header;
 import de.pmrd.hackcalculator.view.layout.components.Menu;
+
 import java.util.Optional;
 
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@Theme(Lumo.class)
 public class DefaultLayout extends AppLayout {
 
   private Menu menu;

@@ -1,7 +1,7 @@
-package de.pmrd.hackcalculator.history.jpa;
+package de.pmrd.hackcalculator.repositories.history.jpa;
 
-import de.pmrd.hackcalculator.history.HistoryItemRepository;
-import de.pmrd.hackcalculator.history.jpa.model.HistoryItemJpaEntity;
+import de.pmrd.hackcalculator.repositories.history.HistoryItemRepository;
+import de.pmrd.hackcalculator.repositories.history.jpa.model.HistoryItemJpaEntity;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
 import org.springframework.stereotype.Repository;
 

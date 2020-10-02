@@ -1,6 +1,6 @@
 package de.pmrd.hackcalculator.service;
 
-import de.pmrd.hackcalculator.history.HistoryItemRepository;
+import de.pmrd.hackcalculator.repositories.history.HistoryItemRepository;
 import de.pmrd.hackcalculator.service.model.HistoryBackendItem;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

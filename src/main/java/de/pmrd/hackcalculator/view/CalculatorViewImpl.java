@@ -10,26 +10,22 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.router.AfterNavigationEvent;
-import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.HasDynamicTitle;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.PWA;
 import de.pmrd.hackcalculator.presenter.CalculatorPresenter;
 import de.pmrd.hackcalculator.view.contracts.CalculatorView;
 import de.pmrd.hackcalculator.view.events.CalculatorViewInitEvent;
 import de.pmrd.hackcalculator.view.layout.DefaultLayout;
 import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
-import java.math.BigDecimal;
 import org.springframework.context.ApplicationEventPublisher;
+
+import java.math.BigDecimal;
 
 @PWA(name = "Hack-Calculator", shortName = "Hacki")
 @Route(value = CalculatorView.VIEW_NAME, layout = DefaultLayout.class)
-@RouteAlias(value = "", layout = DefaultLayout.class)
-@CssImport("./styles/shared-styles.css")
+@CssImport("./styles/shared.css")
 public class CalculatorViewImpl extends Composite<VerticalLayout>
-    implements CalculatorView, AfterNavigationObserver, HasDynamicTitle {
+    implements CalculatorView, AfterNavigationObserver, HasDynamicTitle, HasUrlParameter<String> {
 
   private final ApplicationEventPublisher eventPublisher;
 
@@ -140,5 +136,10 @@ public class CalculatorViewImpl extends Composite<VerticalLayout>
         .forField(numberOfPersons)
         .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
         .bind(CalculatorViewModel::getNumberOfPersons, CalculatorViewModel::setNumberOfPersons);
+  }
+
+  @Override
+  public void setParameter(BeforeEvent event, @OptionalParameter String workspaceId) {
+    System.out.println(getClass() + ": " + workspaceId);
   }
 }

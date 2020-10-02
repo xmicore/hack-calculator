@@ -1,3 +1,17 @@
+html {
+    --lumo-primary-text-color: rgb(246, 65, 92);
+    --lumo-primary-color-50pct: rgba(246, 65, 92, 0.5);
+    --lumo-primary-color-10pct: rgba(246, 65, 92, 0.1);
+    --lumo-primary-color: hsl(351, 91%, 61%);
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
 .branding_label {
     padding: 0.5rem 0;
 }
