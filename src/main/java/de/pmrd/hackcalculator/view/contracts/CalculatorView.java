@@ -1,27 +1,28 @@
 package de.pmrd.hackcalculator.view.contracts;
 
 import de.pmrd.hackcalculator.view.model.CalculatorViewModel;
+
 import java.math.BigDecimal;
 
 public interface CalculatorView {
 
-  String VIEW_NAME = "calculator";
+    String VIEW_NAME = "calculator";
 
-  void setModel(CalculatorViewModel model);
+    void setModel(CalculatorViewModel model);
 
-  void setQuantity(BigDecimal quantity);
+    void setQuantity(BigDecimal quantity);
 
-  void setCalculateListener(CalculateListener listener);
+    void setCalculateListener(CalculateListener listener);
 
-  void setSaveListener(SaveListener listener);
+    void setSaveListener(SaveListener listener);
 
-  interface CalculateListener {
+    interface CalculateListener {
 
-    void calculate();
-  }
+        void calculate();
+    }
 
-  interface SaveListener {
+    interface SaveListener {
 
-    String save();
-  }
+        String save();
+    }
 }

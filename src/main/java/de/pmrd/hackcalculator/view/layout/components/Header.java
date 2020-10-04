@@ -10,25 +10,25 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 public class Header extends Composite<FlexLayout> {
 
-  @Override
-  protected FlexLayout initContent() {
-    FlexLayout content = new FlexLayout();
-    content.setClassName("branding");
-    content.add(getLogo(), getLabel());
-    content.setAlignSelf(Alignment.CENTER);
-    return content;
-  }
+    @Override
+    protected FlexLayout initContent() {
+        FlexLayout content = new FlexLayout();
+        content.setClassName("branding");
+        content.add(getLogo(), getLabel());
+        content.setAlignSelf(Alignment.CENTER);
+        return content;
+    }
 
-  private Span getLogo() {
-    Image logo = new Image("icons/icon.png", "logo");
-    Span span = new Span(logo);
-    span.setClassName("branding__logo");
-    return span;
-  }
+    private Span getLogo() {
+        Image logo = new Image("icons/icon.png", "logo");
+        Span span = new Span(logo);
+        span.setClassName("branding__logo");
+        return span;
+    }
 
-  private Label getLabel() {
-    Label label = new Label("Hack-Calculator");
-    label.addClassName("branding_label");
-    return label;
-  }
+    private Label getLabel() {
+        Label label = new Label("Hack-Calculator");
+        label.addClassName("branding_label");
+        return label;
+    }
 }

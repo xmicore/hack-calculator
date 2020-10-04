@@ -6,6 +6,8 @@ public interface WorkspaceContract {
 
         void navigateToCalculation(String workspaceId);
 
+        void navigateToCalculation();
+
     }
 
     interface Presenter {
@@ -15,6 +17,12 @@ public interface WorkspaceContract {
         void selectWorkspace(String workspace);
 
         void createWorkspace(String workspace);
+
+        void skipWorkspace();
+
+        boolean isWorkspaceUnique(String workspace);
+
+        boolean isWorkspaceExists(String workspace);
     }
 
 }

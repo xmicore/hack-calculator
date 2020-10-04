@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 
 public class HistoryEditViewInitEvent extends ApplicationEvent {
 
-  public HistoryEditViewInitEvent(Object source) {
-    super(source);
-  }
+    public HistoryEditViewInitEvent(Object source) {
+        super(source);
+    }
 }

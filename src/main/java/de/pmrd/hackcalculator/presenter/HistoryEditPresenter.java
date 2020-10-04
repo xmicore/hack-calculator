@@ -17,37 +17,37 @@ import org.springframework.web.context.annotation.RequestScope;
 @RequestScope
 public class HistoryEditPresenter {
 
-  private final ConversionService converter;
-  private final HistoryService backend;
-  private HistoryEditView view;
-  private HistoryEditViewModel model;
+    private final ConversionService converter;
+    private final HistoryService backend;
+    private HistoryEditView view;
+    private final HistoryEditViewModel model;
 
-  public HistoryEditPresenter(ConversionService converter, HistoryService backend) {
-    this.converter = converter;
-    this.backend = backend;
-    this.model = new HistoryEditViewModel();
-  }
+    public HistoryEditPresenter(ConversionService converter, HistoryService backend) {
+        this.converter = converter;
+        this.backend = backend;
+        this.model = new HistoryEditViewModel();
+    }
 
-  public void setView(HistoryEditView view) {
-    this.view = view;
-  }
+    public void setView(HistoryEditView view) {
+        this.view = view;
+    }
 
-  @EventListener
-  public void beforeInit(HistoryEditViewBeforeInitEvent event) {
-    backend
-        .getHistoryItem(event.getItemId())
-        .map(e -> converter.convert(e, HistoryViewItem.class))
-        .ifPresent(e -> model.setItem(e));
-  }
+    @EventListener
+    public void beforeInit(HistoryEditViewBeforeInitEvent event) {
+        backend
+                .getHistoryItem(event.getItemId())
+                .map(e -> converter.convert(e, HistoryViewItem.class))
+                .ifPresent(e -> model.setItem(e));
+    }
 
-  @EventListener
-  public void init(HistoryEditViewInitEvent event) {
-    view.setHistoryItem(model.getItem());
-  }
+    @EventListener
+    public void init(HistoryEditViewInitEvent event) {
+        view.setHistoryItem(model.getItem());
+    }
 
-  @EventListener
-  public void update(HistoryUpdateEvent event) {
-    final HistoryBackendItem item = converter.convert(event.getItem(), HistoryBackendItem.class);
-    backend.updateHistoryItem(item);
-  }
+    @EventListener
+    public void update(HistoryUpdateEvent event) {
+        final HistoryBackendItem item = converter.convert(event.getItem(), HistoryBackendItem.class);
+        backend.updateHistoryItem(item);
+    }
 }

@@ -4,12 +4,11 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 100%;
-    background: linear-gradient(0deg, #efefef 50%, #ffffff 50%);
+    min-height: 100%;
 }
 
 .workspace > h1 {
-    margin-bottom: 3rem;
+    margin: 2rem 0;
 }
 
 .workspace > vaadin-text-field,
@@ -17,6 +16,11 @@
     width: 15rem;
 }
 
-.workspace > img {
-    max-width: 256px;
+.workspace__image {
+    max-width: 10em;
+}
+
+.workspace__separator {
+    color: var(--lumo-tertiary-text-color);
+    font-weight: bold;
 }

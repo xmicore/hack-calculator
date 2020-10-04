@@ -16,35 +16,35 @@ import java.util.Optional;
 @Theme(Lumo.class)
 public class DefaultLayout extends AppLayout {
 
-  private Menu menu;
+    private Menu menu;
 
-  public DefaultLayout() {
-    initContent();
-  }
+    public DefaultLayout() {
+        initContent();
+    }
 
-  @Override
-  protected void afterNavigation() {
-    super.afterNavigation();
-    final Tabs menuTabs = menu.getContent();
-    final String target = RouteConfiguration.forSessionScope().getUrl(getContent().getClass());
-    final Optional<Component> selectedTab = getSelectedTab(menuTabs, target);
-    selectedTab.ifPresent(tab -> menuTabs.setSelectedTab((Tab) tab));
-  }
+    @Override
+    protected void afterNavigation() {
+        super.afterNavigation();
+        final Tabs menuTabs = menu.getContent();
+        final String target = RouteConfiguration.forSessionScope().getUrl(getContent().getClass());
+        final Optional<Component> selectedTab = getSelectedTab(menuTabs, target);
+        selectedTab.ifPresent(tab -> menuTabs.setSelectedTab((Tab) tab));
+    }
 
-  private void initContent() {
-    menu = new Menu();
-    addToNavbar(new Header());
-    addToNavbar(true, menu);
-  }
+    private void initContent() {
+        menu = new Menu();
+        addToNavbar(new Header());
+        addToNavbar(true, menu);
+    }
 
-  private Optional<Component> getSelectedTab(Tabs menuTabs, String target) {
-    return menuTabs
-        .getChildren()
-        .filter(
-            tab -> {
-              Component child = tab.getChildren().findFirst().orElse(new RouterLink());
-              return child instanceof RouterLink && ((RouterLink) child).getHref().equals(target);
-            })
-        .findFirst();
-  }
+    private Optional<Component> getSelectedTab(Tabs menuTabs, String target) {
+        return menuTabs
+                .getChildren()
+                .filter(
+                        tab -> {
+                            Component child = tab.getChildren().findFirst().orElse(new RouterLink());
+                            return child instanceof RouterLink && ((RouterLink) child).getHref().equals(target);
+                        })
+                .findFirst();
+    }
 }

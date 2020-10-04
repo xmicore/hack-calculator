@@ -25,121 +25,121 @@ import java.math.BigDecimal;
 @Route(value = CalculatorView.VIEW_NAME, layout = DefaultLayout.class)
 @CssImport("./styles/shared.css")
 public class CalculatorViewImpl extends Composite<VerticalLayout>
-    implements CalculatorView, AfterNavigationObserver, HasDynamicTitle, HasUrlParameter<String> {
+        implements CalculatorView, AfterNavigationObserver, HasDynamicTitle, HasUrlParameter<String> {
 
-  private final ApplicationEventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
-  private Binder<CalculatorViewModel> binder = new Binder<>(CalculatorViewModel.class);
+    private final Binder<CalculatorViewModel> binder = new Binder<>(CalculatorViewModel.class);
 
-  private NumberField numberOfPersons;
-  private NumberField hackPerBun;
-  private NumberField bunsPerPerson;
-  private Button shoppingListBtn;
-  private Label result;
+    private NumberField numberOfPersons;
+    private NumberField hackPerBun;
+    private NumberField bunsPerPerson;
+    private Button shoppingListBtn;
+    private Label result;
 
-  public CalculatorViewImpl(
-      CalculatorPresenter presenter, ApplicationEventPublisher eventPublisher) {
-    presenter.setView(this);
-    this.eventPublisher = eventPublisher;
-  }
+    public CalculatorViewImpl(
+            CalculatorPresenter presenter, ApplicationEventPublisher eventPublisher) {
+        presenter.setView(this);
+        this.eventPublisher = eventPublisher;
+    }
 
-  @Override
-  public void setModel(CalculatorViewModel model) {
-    binder.setBean(model);
-  }
+    @Override
+    public void setModel(CalculatorViewModel model) {
+        binder.setBean(model);
+    }
 
-  @Override
-  public void setQuantity(BigDecimal quantity) {
-    result.setText(getTranslation("view.calculator.resultMessage", quantity));
-  }
+    @Override
+    public void setQuantity(BigDecimal quantity) {
+        result.setText(getTranslation("view.calculator.resultMessage", quantity));
+    }
 
-  @Override
-  public void setCalculateListener(CalculateListener listener) {
-    binder.addValueChangeListener(e -> listener.calculate());
-  }
+    @Override
+    public void setCalculateListener(CalculateListener listener) {
+        binder.addValueChangeListener(e -> listener.calculate());
+    }
 
-  @Override
-  public void setSaveListener(SaveListener listener) {
-    shoppingListBtn.addClickListener(
-        e -> getUI().ifPresent(ui -> ui.navigate(ShoppingListViewImpl.class, listener.save())));
-  }
+    @Override
+    public void setSaveListener(SaveListener listener) {
+        shoppingListBtn.addClickListener(
+                e -> getUI().ifPresent(ui -> ui.navigate(ShoppingListViewImpl.class, listener.save())));
+    }
 
-  @Override
-  public String getPageTitle() {
-    return getTranslation("view.calculator.pageTitle");
-  }
+    @Override
+    public String getPageTitle() {
+        return getTranslation("view.calculator.pageTitle");
+    }
 
-  @Override
-  public void afterNavigation(AfterNavigationEvent event) {
-    eventPublisher.publishEvent(new CalculatorViewInitEvent(this));
-  }
+    @Override
+    public void afterNavigation(AfterNavigationEvent event) {
+        eventPublisher.publishEvent(new CalculatorViewInitEvent(this));
+    }
 
-  @Override
-  protected VerticalLayout initContent() {
-    VerticalLayout content = new VerticalLayout();
-    content.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
+    @Override
+    protected VerticalLayout initContent() {
+        VerticalLayout content = new VerticalLayout();
+        content.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
-    initNumberOfPersons();
-    initHackPerBun();
-    initBunsPerPerson();
-    initResult();
-    initShoppingListBtn();
+        initNumberOfPersons();
+        initHackPerBun();
+        initBunsPerPerson();
+        initResult();
+        initShoppingListBtn();
 
-    content.add(numberOfPersons, hackPerBun, bunsPerPerson, result, shoppingListBtn);
-    return content;
-  }
+        content.add(numberOfPersons, hackPerBun, bunsPerPerson, result, shoppingListBtn);
+        return content;
+    }
 
-  private void initShoppingListBtn() {
-    shoppingListBtn = new Button(getTranslation("view.calculator.shoppingListBtnCaption"));
-    shoppingListBtn.setIcon(VaadinIcon.LIST.create());
-  }
+    private void initShoppingListBtn() {
+        shoppingListBtn = new Button(getTranslation("view.calculator.shoppingListBtnCaption"));
+        shoppingListBtn.setIcon(VaadinIcon.LIST.create());
+    }
 
-  private void initResult() {
-    result = new Label();
-    result.setId("result");
-  }
+    private void initResult() {
+        result = new Label();
+        result.setId("result");
+    }
 
-  private void initBunsPerPerson() {
-    bunsPerPerson = new NumberField(getTranslation("view.calculator.bunsPerPerson"));
-    bunsPerPerson.setId("bunsPerPerson");
-    bunsPerPerson.setHasControls(true);
-    bunsPerPerson.setMin(0.5);
-    bunsPerPerson.setStep(0.5);
-    bunsPerPerson.setMinWidth("15em");
-    binder
-        .forField(bunsPerPerson)
-        .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
-        .bind(CalculatorViewModel::getNumberOfBuns, CalculatorViewModel::setNumberOfBuns);
-  }
+    private void initBunsPerPerson() {
+        bunsPerPerson = new NumberField(getTranslation("view.calculator.bunsPerPerson"));
+        bunsPerPerson.setId("bunsPerPerson");
+        bunsPerPerson.setHasControls(true);
+        bunsPerPerson.setMin(0.5);
+        bunsPerPerson.setStep(0.5);
+        bunsPerPerson.setMinWidth("15em");
+        binder
+                .forField(bunsPerPerson)
+                .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
+                .bind(CalculatorViewModel::getNumberOfBuns, CalculatorViewModel::setNumberOfBuns);
+    }
 
-  private void initHackPerBun() {
-    hackPerBun = new NumberField(getTranslation("view.calculator.hackPerBun"));
-    hackPerBun.setId("hackPerBun");
-    hackPerBun.setHasControls(true);
-    hackPerBun.setMin(5);
-    hackPerBun.setStep(5);
-    hackPerBun.setMinWidth("15em");
-    binder
-        .forField(hackPerBun)
-        .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
-        .bind(CalculatorViewModel::getHackPerBun, CalculatorViewModel::setHackPerBun);
-  }
+    private void initHackPerBun() {
+        hackPerBun = new NumberField(getTranslation("view.calculator.hackPerBun"));
+        hackPerBun.setId("hackPerBun");
+        hackPerBun.setHasControls(true);
+        hackPerBun.setMin(5);
+        hackPerBun.setStep(5);
+        hackPerBun.setMinWidth("15em");
+        binder
+                .forField(hackPerBun)
+                .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
+                .bind(CalculatorViewModel::getHackPerBun, CalculatorViewModel::setHackPerBun);
+    }
 
-  private void initNumberOfPersons() {
-    numberOfPersons = new NumberField(getTranslation("view.calculator.numberOfPersons"));
-    numberOfPersons.setId("numberOfPersons");
-    numberOfPersons.setHasControls(true);
-    numberOfPersons.setMin(1);
-    numberOfPersons.setMinWidth("15em");
-    numberOfPersons.setValueChangeMode(ValueChangeMode.ON_CHANGE);
-    binder
-        .forField(numberOfPersons)
-        .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
-        .bind(CalculatorViewModel::getNumberOfPersons, CalculatorViewModel::setNumberOfPersons);
-  }
+    private void initNumberOfPersons() {
+        numberOfPersons = new NumberField(getTranslation("view.calculator.numberOfPersons"));
+        numberOfPersons.setId("numberOfPersons");
+        numberOfPersons.setHasControls(true);
+        numberOfPersons.setMin(1);
+        numberOfPersons.setMinWidth("15em");
+        numberOfPersons.setValueChangeMode(ValueChangeMode.ON_CHANGE);
+        binder
+                .forField(numberOfPersons)
+                .withConverter(BigDecimal::valueOf, BigDecimal::doubleValue)
+                .bind(CalculatorViewModel::getNumberOfPersons, CalculatorViewModel::setNumberOfPersons);
+    }
 
-  @Override
-  public void setParameter(BeforeEvent event, @OptionalParameter String workspaceId) {
-    System.out.println(getClass() + ": " + workspaceId);
-  }
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String workspaceId) {
+        System.out.println(getClass() + ": " + workspaceId);
+    }
 }

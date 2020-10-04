@@ -5,7 +5,7 @@ public enum QuantityUnit {
     CHUNK("quantityUnit.chunk"),
     GRAM("quantityUnit.gram");
 
-    private String key;
+    private final String key;
 
     QuantityUnit(String key) {
         this.key = key;
