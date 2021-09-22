@@ -1,23 +1,23 @@
 package de.pmrd.hackcalculator.repositories.workspace.jpa.model;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.UUID;
 
-@NamedQueries(
-        @NamedQuery(
-                name = WorkspaceJpaEntity.FIND_BY_NAME,
-                query = "SELECT w FROM WorkspaceJpaEntity w WHERE w.workspace = :name"))
-@Entity
-@Table(name = WorkspaceJpaEntity.TABLE_NAME)
+//@NamedQueries(
+//        @NamedQuery(
+//                name = WorkspaceJpaEntity.FIND_BY_NAME,
+//                query = "SELECT w FROM WorkspaceJpaEntity w WHERE w.workspace = :name"))
+//@Entity
+//@Table(name = WorkspaceJpaEntity.TABLE_NAME)
 public class WorkspaceJpaEntity {
 
     public static final String TABLE_NAME = "HCK_WORKSPACES";
     public static final String FIND_BY_NAME = "Workspace.findByName";
 
-    @Id
+//    @Id
     private UUID id;
 
-    @Column(unique = true)
+//    @Column(unique = true)
     private String workspace;
 
     public WorkspaceJpaEntity() {

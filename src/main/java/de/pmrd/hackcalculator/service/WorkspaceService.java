@@ -9,19 +9,20 @@ import java.util.Optional;
 @Service
 public class WorkspaceService {
 
-    private final WorkspaceRepository repository;
+//    private final WorkspaceRepository repository;
 
-    public WorkspaceService(WorkspaceRepository repository) {
-        this.repository = repository;
+    public WorkspaceService() {
+//        this.repository = repository;
     }
 
     public Optional<Workspace> createWorkspace(String name) {
         Workspace workspace = new Workspace(name);
-        repository.create(workspace);
+//        repository.create(workspace);
         return Optional.of(workspace);
     }
 
     public Optional<Workspace> getWorkspace(String name) {
-        return repository.findWorkspaceByName(name);
+        return Optional.empty();
+//        return repository.findWorkspaceByName(name);
     }
 }

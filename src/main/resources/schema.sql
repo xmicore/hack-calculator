@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS HCK_HISTORY_ITEMS, HCK_WORKSPACES;
+
+
 CREATE MEMORY TABLE "PUBLIC"."HCK_HISTORY_ITEMS"(
                                                     "ID" BINARY NOT NULL,
                                                     "HACK_PER_BUN" DECIMAL(19, 2),

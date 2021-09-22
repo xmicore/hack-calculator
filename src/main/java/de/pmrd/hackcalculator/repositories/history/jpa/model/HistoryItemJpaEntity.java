@@ -1,22 +1,22 @@
 package de.pmrd.hackcalculator.repositories.history.jpa.model;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-@Table(name = HistoryItemJpaEntity.TABLE_NAME)
-@NamedQueries(
-        @NamedQuery(
-                name = HistoryItemJpaEntity.FIND_ALL,
-                query = "SELECT i FROM HistoryItemJpaEntity i"))
+//@Entity
+//@Table(name = HistoryItemJpaEntity.TABLE_NAME)
+//@NamedQueries(
+//        @NamedQuery(
+//                name = HistoryItemJpaEntity.FIND_ALL,
+//                query = "SELECT i FROM HistoryItemJpaEntity i"))
 public class HistoryItemJpaEntity {
 
     public static final String FIND_ALL = "HistoryItem.findAll";
     public static final String TABLE_NAME = "HCK_HISTORY_ITEMS";
 
-    @Id
+//    @Id
     private UUID id;
     private BigDecimal numberOfBuns;
     private BigDecimal hackPerBun;
